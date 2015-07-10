@@ -37,20 +37,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.Logging">
-      <HintPath>..\packages\Castle.LoggingFacility.3.2.0\lib\net40\Castle.Facilities.Logging.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Services.Logging.NLogIntegration">
-      <HintPath>..\packages\Castle.Core-NLog.3.2.0\lib\net40\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.4.0.1\lib\net40\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net40\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,13 +58,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Topshelf">
-      <HintPath>..\packages\TopShelf.3.1.1\lib\net40-full\Topshelf.dll</HintPath>
+      <HintPath>..\packages\Topshelf.3.2.0\lib\net40-full\Topshelf.dll</HintPath>
     </Reference>
-    <Reference Include="Topshelf.NLog">
-      <HintPath>..\packages\Topshelf.NLog.3.1.1\lib\net40-full\Topshelf.NLog.dll</HintPath>
+    <Reference Include="Topshelf.Ninject">
+      <HintPath>..\packages\Topshelf.Ninject.0.4.0.0\lib\net40\Topshelf.Ninject.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IServiceTester.cs" />
+    <Compile Include="NinjectMod.cs" />
     <Compile Include="ServiceTester.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +82,10 @@
     <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
       <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
       <Name>Prototype.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
+      <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
+      <Name>Prototype.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Prototype.MessageTypes\Prototype.MessageTypes.csproj">
       <Project>{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}</Project>

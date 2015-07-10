@@ -33,17 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net40\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\EasyNetQ.0.14.3.123\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.0.1\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\RabbitMQ.Client.3.1.1\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -58,17 +55,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consumers\TestMessageConsumer.cs" />
-    <Compile Include="Dispatcher\WindsorMessageDispatcher.cs" />
+    <Compile Include="Dispatcher\MessageDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responders\IResponder.cs" />
-    <Compile Include="Responders\TestRequestResponder.cs" />
-    <Compile Include="Startables\AutoSubscriberStartable.cs" />
-    <Compile Include="Startables\RequestRespondersStartable.cs" />
+    <Compile Include="Subscribers\SampleAutoSubscriber.cs" />
+    <Compile Include="Subscribers\IAutoSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
       <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
       <Name>Prototype.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
+      <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
+      <Name>Prototype.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Prototype.MessageTypes\Prototype.MessageTypes.csproj">
       <Project>{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}</Project>
@@ -76,6 +75,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

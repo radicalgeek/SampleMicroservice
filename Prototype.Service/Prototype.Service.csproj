@@ -8,8 +8,8 @@
     <ProjectGuid>{BBF92C72-30BF-46E2-8C09-35D1E4773C82}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CreateRequest.Service</RootNamespace>
-    <AssemblyName>CreateRequest.Service</AssemblyName>
+    <RootNamespace>Prototype.Service</RootNamespace>
+    <AssemblyName>Prototype.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -39,17 +39,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyNetQ, Version=0.14.3.123, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EasyNetQ.0.14.3.123\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.Extensions.Logging">
-      <HintPath>..\packages\Ninject.Extensions.Logging.3.2.0.0\lib\net45-full\Ninject.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Logging.NLog2">
-      <HintPath>..\packages\Ninject.Extensions.Logging.nlog2.3.2.2.0\lib\net45-full\Ninject.Extensions.Logging.NLog2.dll</HintPath>
-    </Reference>
     <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.1.1.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RabbitMQ.Client.3.1.1\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,12 +67,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Topshelf.3.2.0\lib\net40-full\Topshelf.dll</HintPath>
     </Reference>
+    <Reference Include="Topshelf.Ninject">
+      <HintPath>..\packages\Topshelf.Ninject.0.4.0.0\lib\net45\Topshelf.Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Topshelf.NLog">
       <HintPath>..\packages\Topshelf.NLog.3.1.1\lib\net40-full\Topshelf.NLog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateRequestWindowsService.cs" />
+    <Compile Include="Services\ISampleService.cs" />
+    <Compile Include="Modules\IocModule.cs" />
+    <Compile Include="Services\SampleService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +92,10 @@
     <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
       <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
       <Name>Prototype.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
+      <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
+      <Name>Prototype.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Prototype.Subscribers\Prototype.Subscribers.csproj">
       <Project>{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}</Project>

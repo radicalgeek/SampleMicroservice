@@ -1,6 +1,7 @@
 ﻿using System;
-using Castle.Core.Logging;
 using EasyNetQ;
+using Prototype.Logger;
+
 
 namespace Prototype.Infrastructure
 {
@@ -21,7 +22,7 @@ namespace Prototype.Infrastructure
             {
                 using (var publishChannel = _bus.OpenPublishChannel())
                 {
-                    _logger.InfoFormat("Publishing Message: {0}", message);
+                    _logger.Info("Publishing Message: {0}", message);
                     publishChannel.Publish(message);
                 }
             }
@@ -40,7 +41,7 @@ namespace Prototype.Infrastructure
             {
                 using (var publishChannel = _bus.OpenPublishChannel())
                 {
-                    _logger.InfoFormat("Publishing Request: {0}", request);
+                    _logger.Info("Publishing Request: {0}", request);
                     publishChannel.Request(request, onResponse);
                 }
             }
@@ -56,7 +57,7 @@ namespace Prototype.Infrastructure
         {
             try
             {
-                _logger.InfoFormat("Publishing Response: {0}", onResponse);
+                _logger.Info("Publishing Response: {0}", onResponse);
                 _bus.Respond(onResponse);
             }
             catch (EasyNetQException ex)

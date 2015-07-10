@@ -1,6 +1,7 @@
-﻿using Castle.Core.Logging;
+﻿using Prototype.Logger;
 using EasyNetQ.AutoSubscribe;
 using Newtonsoft.Json;
+
 using Prototype.MessageTypes.Messages;
 
 namespace Prototype.Subscribers.Consumers
@@ -9,17 +10,16 @@ namespace Prototype.Subscribers.Consumers
     {
         private ILogger _logger;
 
-        public ILogger Logger
-        {
-            get { return _logger ?? (_logger = NullLogger.Instance); }
-            set { _logger = value; }
-        }
 
+        public TestMessageConsumer(ILogger logger)
+        {
+            _logger = logger;
+        }
 
 
         public void Consume(TestMessage message)
         {
-            _logger.InfoFormat("Message recieved {0}", message.Message);
+            _logger.Info("Message recieved {0}", message.Message);
         }
 
     }

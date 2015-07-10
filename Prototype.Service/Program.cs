@@ -1,22 +1,39 @@
-﻿using System.Threading;
+﻿using System.Reflection;
+using System.Threading;
+using Prototype.Service.Modules;
+using Ninject.Modules;
 using Topshelf;
+using Ninject;
+using Topshelf.Ninject;
 
 namespace Prototype.Service
 {
-    class Program
+    using Ninject.Modules;
+    using System.Runtime.Remoting.Services;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static int Main(string[] args)
         {
             Thread.CurrentThread.Name = "Service Main Thread";
-            HostFactory.Run(x =>
+            var exitCode = HostFactory.Run(x =>
             {
-                x.Service<CreateRequestWindowsService>();
+                x.UseNinject(new Prototype.Service.Modules.IocModule());
+
+                x.Service<SampleService>(s =>
+                {
+                    s.ConstructUsingNinject();
+                    s.WhenStarted((service, hostControl) => service.Start(hostControl));
+                    s.WhenStopped((service, hostControl) => service.Stop(hostControl));
+
+                });
                 x.RunAsLocalSystem();
                 x.SetDescription("Prototype .NET Micro Service");
-                x.SetDisplayName(typeof(CreateRequestWindowsService).Namespace);
-                x.SetServiceName(typeof(CreateRequestWindowsService).Namespace);
+                x.SetDisplayName(typeof(SampleService).Namespace);
+                x.SetServiceName(typeof(SampleService).Namespace);
                 x.UseNLog();
             });
+            return (int) exitCode;
         }
     }
 }
