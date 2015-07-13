@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using Prototype.Logger;
@@ -33,6 +34,11 @@ namespace Prototype.Subscribers.Dispatcher
 
                 
             
+        }
+
+        public Task DispatchAsync<TMessage, TConsumer>(TMessage message) where TMessage : class where TConsumer : IConsumeAsync<TMessage>
+        {
+            throw new NotImplementedException();
         }
     }
 

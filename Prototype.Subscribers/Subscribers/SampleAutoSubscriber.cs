@@ -24,7 +24,7 @@ namespace Prototype.Subscribers.Startables
         public void Start()
         {
             //todo move strings to configs
-            var autoSubscriber = new EasyNetQ.AutoSubscribe.AutoSubscriber(_bus, "My_subscription_id_prefix")
+            var autoSubscriber = new AutoSubscriber(_bus, "Sample_Queue")
             {
                 AutoSubscriberMessageDispatcher = _messageDispatcher
             };

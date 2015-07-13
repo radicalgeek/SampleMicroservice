@@ -15,24 +15,35 @@ namespace Prototype.Service
     {
         public static int Main(string[] args)
         {
+            var exitCode = new TopshelfExitCode();
             Thread.CurrentThread.Name = "Service Main Thread";
-            var exitCode = HostFactory.Run(x =>
-            {
-                x.UseNinject(new Prototype.Service.Modules.IocModule());
-
-                x.Service<SampleService>(s =>
+            
+                try
                 {
-                    s.ConstructUsingNinject();
-                    s.WhenStarted((service, hostControl) => service.Start(hostControl));
-                    s.WhenStopped((service, hostControl) => service.Stop(hostControl));
+                    exitCode = HostFactory.Run(x =>
+                    {
+                        x.UseNinject(new Prototype.Service.Modules.IocModule());
 
-                });
-                x.RunAsLocalSystem();
-                x.SetDescription("Prototype .NET Micro Service");
-                x.SetDisplayName(typeof(SampleService).Namespace);
-                x.SetServiceName(typeof(SampleService).Namespace);
-                x.UseNLog();
-            });
+                        x.Service<SampleService>(s =>
+                        {
+                            s.ConstructUsingNinject();
+                            s.WhenStarted((service, hostControl) => service.Start(hostControl));
+                            s.WhenStopped((service, hostControl) => service.Stop(hostControl));
+
+                        });
+                        x.RunAsLocalSystem();
+                        x.SetDescription("Prototype .NET Micro Service");
+                        x.SetDisplayName(typeof(SampleService).Namespace);
+                        x.SetServiceName(typeof(SampleService).Namespace);
+                        x.UseNLog();
+                    });
+                }
+                catch (System.Exception ex)
+                {
+                    
+                    throw;
+                }
+            
             return (int) exitCode;
         }
     }

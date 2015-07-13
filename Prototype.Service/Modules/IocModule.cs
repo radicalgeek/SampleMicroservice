@@ -1,8 +1,10 @@
 ﻿using EasyNetQ;
+using EasyNetQ.AutoSubscribe;
 using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Installers;
 using Prototype.Logger;
+using Prototype.Subscribers.Dispatcher;
 using Prototype.Subscribers.Startables;
 
 namespace Prototype.Service.Modules
@@ -16,6 +18,7 @@ namespace Prototype.Service.Modules
             Bind<ILogger>().To<Logger.Logger>().InSingletonScope();
             Bind<IMessagePublisher>().To<MessagePublisher>();
             Bind<IAutoSubscriber>().To<SampleAutoSubscriber>();
+            Bind<IAutoSubscriberMessageDispatcher>().To<MessageDispatcher>();
 
         }
     }

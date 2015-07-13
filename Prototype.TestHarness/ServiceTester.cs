@@ -26,8 +26,16 @@ namespace CreateRequestServiceTester.Service
 
             var message = new TestMessage {Message = " ### Hello this is a message from a remote service ###"};
 
-            _messagePublisher.Publish(message);
+            try
+            {
+                _messagePublisher.Publish(message);
 
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
             return true;
         }
 

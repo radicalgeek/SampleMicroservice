@@ -20,11 +20,11 @@ namespace Prototype.Infrastructure
         {
             try
             {
-                using (var publishChannel = _bus.OpenPublishChannel())
-                {
+                //using (var publishChannel = _bus.OpenPublishChannel())
+                //{
                     _logger.Info("Publishing Message: {0}", message);
-                    publishChannel.Publish(message);
-                }
+                    _bus.Publish(message);
+                //}
             }
             catch (EasyNetQException ex)
             {
@@ -39,11 +39,11 @@ namespace Prototype.Infrastructure
         {
             try
             {
-                using (var publishChannel = _bus.OpenPublishChannel())
-                {
-                    _logger.Info("Publishing Request: {0}", request);
-                    publishChannel.Request(request, onResponse);
-                }
+                //using (var publishChannel = _bus.OpenPublishChannel())
+                //{
+                    //_logger.Info("Publishing Request: {0}", request);
+                    //_bus.Request(request);
+                //}
             }
             catch (EasyNetQException ex)
             {
