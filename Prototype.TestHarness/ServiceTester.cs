@@ -24,7 +24,7 @@ namespace CreateRequestServiceTester.Service
         public bool Start(HostControl hostControl)
         {
 
-            var message = new TestMessage {Message = " ### Hello this is a message from a remote service ###"};
+            var message = new SampleMessage {Message = " ### Hello this is a message from a remote service ###"};
 
             try
             {

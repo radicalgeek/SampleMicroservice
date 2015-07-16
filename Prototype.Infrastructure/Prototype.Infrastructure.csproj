@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMessagePublisher.cs" />
-    <Compile Include="Installers\BusFactory.cs" />
+    <Compile Include="Factory\BusFactory.cs" />
     <Compile Include="MessagePublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

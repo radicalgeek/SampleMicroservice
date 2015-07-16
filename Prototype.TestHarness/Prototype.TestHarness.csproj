@@ -8,8 +8,8 @@
     <ProjectGuid>{98814830-B35F-4374-94D7-D230825A1351}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CreateRequestServiceTester.Service</RootNamespace>
-    <AssemblyName>CreateRequestServiceTester.Service</AssemblyName>
+    <RootNamespace>Prototype.TestHarness</RootNamespace>
+    <AssemblyName>Prototype.TestHarness</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

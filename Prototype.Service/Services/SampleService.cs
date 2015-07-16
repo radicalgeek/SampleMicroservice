@@ -7,6 +7,9 @@ using Topshelf.Logging;
 
 namespace Prototype.Service
 {
+    /// <summary>
+    /// Sample service to demonstrate topshelf microservice
+    /// </summary>
     public class SampleService : ServiceControl, ISampleService
     {
         private readonly ILogger _logger;
@@ -18,6 +21,11 @@ namespace Prototype.Service
             _sampleAutoSubscriber = sampleAutoSubscriber;
         }
 
+        /// <summary>
+        /// Start the service
+        /// </summary>
+        /// <param name="hostControl">the topshelf host</param>
+        /// <returns>always returns true</returns>
         public bool Start(HostControl hostControl)
         {
             _sampleAutoSubscriber.Start();
@@ -26,6 +34,11 @@ namespace Prototype.Service
             return true;
         }
 
+        /// <summary>
+        /// Stops the service
+        /// </summary>
+        /// <param name="hostControl">the topshelf host</param>
+        /// <returns>always returns true</returns>
         public bool Stop(HostControl hostControl)
         {
             _sampleAutoSubscriber.Stop();

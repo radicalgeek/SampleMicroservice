@@ -20,11 +20,9 @@ namespace Prototype.Infrastructure
         {
             try
             {
-                //using (var publishChannel = _bus.OpenPublishChannel())
-                //{
                     _logger.Info("Publishing Message: {0}", message);
                     _bus.Publish(message);
-                //}
+
             }
             catch (EasyNetQException ex)
             {

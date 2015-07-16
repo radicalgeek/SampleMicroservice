@@ -9,8 +9,14 @@ using Prototype.Subscribers.Startables;
 
 namespace Prototype.Service.Modules
 {
+    /// <summary>
+    /// Niject Module to load and manage dependancies across the lifetime of the service
+    /// </summary>
     public class IocModule : NinjectModule
     {
+        /// <summary>
+        /// Bind Interfaces to implimentations for dependancy injection
+        /// </summary>
         public override void Load()
         {
             Bind<ISampleService>().To<SampleService>();

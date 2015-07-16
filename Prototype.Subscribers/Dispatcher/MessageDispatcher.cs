@@ -27,9 +27,9 @@ namespace Prototype.Subscribers.Dispatcher
                 {
                     _consumer.Consume((IBusMessage)message);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    _logger.Error("Comsume Failed", e);
+                    _logger.Error(ex, "Comsume Failed for message {0}", message);
                 }
 
                 
