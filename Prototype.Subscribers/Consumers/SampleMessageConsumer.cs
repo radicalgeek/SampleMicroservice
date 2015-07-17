@@ -27,7 +27,11 @@ namespace Prototype.Subscribers.Consumers
             _sampleLogic = sampleLogicLayer;
         }
 
-
+        /// <summary>
+        /// Consumes incoming messages, first converting the message JSON into a dynamic object, #
+        /// them passing it to a business logic layer
+        /// </summary>
+        /// <param name="message">Sample message from bus with JSON string</param>
         public void Consume(SampleMessage message)
         {
             var stopwatch = GetStopwatch();
@@ -51,6 +55,11 @@ namespace Prototype.Subscribers.Consumers
 
         }
 
+        /// <summary>
+        /// Converts incoming JSON messagges to C# 4 dynamic objects
+        /// </summary>
+        /// <param name="message">the incoming SampleMessage Object (with a JSON string)</param>
+        /// <returns>dynamic object</returns>
         private static dynamic GetDynamicMessageObject(SampleMessage message)
         {
             var serializer = new JavaScriptSerializer();
@@ -59,6 +68,10 @@ namespace Prototype.Subscribers.Consumers
             return dynamicMessageObject;
         }
 
+        /// <summary>
+        /// resets and returns the stop watch for the recording of execution time
+        /// </summary>
+        /// <returns>Stopwatch  object</returns>
         private  Stopwatch GetStopwatch()
         {
             var stopwatch = new Stopwatch();

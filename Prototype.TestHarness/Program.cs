@@ -1,8 +1,9 @@
 ﻿using System.Threading;
+using CreateRequestServiceTester.Service;
 using Topshelf;
 using Topshelf.Ninject;
 
-namespace CreateRequestServiceTester.Service
+namespace Prototype.TestHarness
 {
     internal class Program
     {

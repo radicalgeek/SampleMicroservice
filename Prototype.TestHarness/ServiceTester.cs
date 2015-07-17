@@ -1,12 +1,11 @@
 ﻿using System;
+using CreateRequestServiceTester.Service;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Installers;
 using Prototype.Logger;
 using Prototype.MessageTypes.Messages;
 using Topshelf;
-using Topshelf.Logging;
 
-namespace CreateRequestServiceTester.Service
+namespace Prototype.TestHarness
 {
     public class ServiceTester : ServiceControl, IServiceTester
     {

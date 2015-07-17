@@ -9,10 +9,11 @@ using System.Web.Script.Serialization;
 
 namespace Prototype.Subscribers.Serializers
 {
+    /// <summary>
+    /// pinched this, can't comment on it, but it seems to work! needs more tests I guess
+    /// </summary>
     public sealed class DynamicJsonConverter : JavaScriptConverter
     {
-
-
         public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
         {
             if (dictionary == null)

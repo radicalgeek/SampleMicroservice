@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using CreateRequestServiceTester.Service;
+using EasyNetQ;
 using Ninject.Modules;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Installers;
+using Prototype.Infrastructure.Factory;
 using Prototype.Logger;
 using Prototype.Subscribers.Startables;
-using Topshelf;
-using EasyNetQ;
 
-namespace CreateRequestServiceTester.Service
+namespace Prototype.TestHarness
 {
     public class NinjectMod : NinjectModule
     {
@@ -18,7 +14,7 @@ namespace CreateRequestServiceTester.Service
         {
             Bind<IServiceTester>().To<ServiceTester>();
             Bind<IBus>().ToMethod(context => BusFactory.CreateMessageBus()).InSingletonScope();
-            Bind<ILogger>().To<Logger>().InSingletonScope();
+            Bind<ILogger>().To<Logger.Logger>().InSingletonScope();
      
             
             Bind<IMessagePublisher>().To<MessagePublisher>();

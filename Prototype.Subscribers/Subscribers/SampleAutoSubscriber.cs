@@ -6,6 +6,9 @@ using EasyNetQ.AutoSubscribe;
 
 namespace Prototype.Subscribers.Startables
 {
+    /// <summary>
+    /// Automaticly subscribes to messages, by locating consumers for message types
+    /// </summary>
     public class SampleAutoSubscriber : IAutoSubscriber
     {
         private readonly IBus _bus;
@@ -21,9 +24,12 @@ namespace Prototype.Subscribers.Startables
             _logger = logger;
         }
 
+        /// <summary>
+        /// Locates instances of IConsumer in this assembly and subscribes to those messages
+        /// </summary>
         public void Start()
         {
-            //todo move strings to configs
+            //TODO: queue name strings to configs
             var autoSubscriber = new AutoSubscriber(_bus, "Sample_Queue")
             {
                 AutoSubscriberMessageDispatcher = _messageDispatcher

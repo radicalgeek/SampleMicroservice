@@ -20,47 +20,13 @@ namespace Prototype.Infrastructure
         {
             try
             {
-                    _logger.Info("Publishing Message: {0}", message);
-                    _bus.Publish(message);
-
+                _logger.Info("Publishing Message: {0}", message);
+                _bus.Publish(message);
+                _logger.Info("Publish Message succeded");
             }
             catch (EasyNetQException ex)
             {
                 _logger.Error("Publish Message Failed: ", ex);
-            }
-        }
-
-
-        public void Request<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse)
-            where TRequest : class
-            where TResponse : class
-        {
-            try
-            {
-                //using (var publishChannel = _bus.OpenPublishChannel())
-                //{
-                    //_logger.Info("Publishing Request: {0}", request);
-                    //_bus.Request(request);
-                //}
-            }
-            catch (EasyNetQException ex)
-            {
-                _logger.Error("Publish Request Failed: ", ex);
-            }
-        }
-
-        public void Response<TRequest, TResponse>(Func<TRequest,TResponse> onResponse)
-            where TRequest : class
-            where TResponse : class
-        {
-            try
-            {
-                _logger.Info("Publishing Response: {0}", onResponse);
-                _bus.Respond(onResponse);
-            }
-            catch (EasyNetQException ex)
-            {
-                _logger.Error("Respond Failed: ", ex);
             }
         }
     }

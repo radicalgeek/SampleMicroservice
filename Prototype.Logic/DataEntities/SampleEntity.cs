@@ -15,6 +15,7 @@ namespace Prototype.Logic.DataEntities
     public class SampleEntity : Entity
     {
         public string Id { get; set; }
-}
     }
 }
+
+

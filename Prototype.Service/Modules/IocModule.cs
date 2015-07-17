@@ -2,7 +2,7 @@
 using EasyNetQ.AutoSubscribe;
 using Ninject.Modules;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Installers;
+using Prototype.Infrastructure.Factory;
 using Prototype.Logger;
 using Prototype.Subscribers.Dispatcher;
 using Prototype.Subscribers.Startables;
