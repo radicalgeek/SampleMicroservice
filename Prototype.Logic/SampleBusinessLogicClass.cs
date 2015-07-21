@@ -104,10 +104,8 @@ namespace Prototype.Logic
         /// <param name="message">The dynamic message from the bus containing the details of the item to be updated</param>
         private void UpdateSampleEntities(dynamic message)
         {
-            //TODO: ensure this method can handle both single items and collections
             var entity = MapMessageToEntities(message);
-            
-
+            _logger.Info("Updating SampleEntities from message: {0}", message.Uuid);
             try
             {
                 _sampleEntityRepository.Update(entity);

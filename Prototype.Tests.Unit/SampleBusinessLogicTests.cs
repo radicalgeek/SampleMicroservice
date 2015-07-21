@@ -324,6 +324,60 @@ namespace Prototype.Tests.Unit
         
         }
 
+        [TestMethod]
+        public void PutOperationLogsEntityUpdating()
+        {
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestUpdateSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
+
+
+            message.Solutions[0].NewStringValue = "Updated Test";
+            message.Solutions[0].NewIntValue = 456;
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[0].Contains("Updating SampleEntities from message"));
+
+        }
+
+        [TestMethod]
+        public void PutOperationLogsEntityUpdated()
+        {
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestUpdateSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
+
+
+            message.Solutions[0].NewStringValue = "Updated Test";
+            message.Solutions[0].NewIntValue = 456;
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[1].Contains("SampleEntities updated for message"));
+
+        }
+
         
 
         #endregion
