@@ -6,4 +6,4 @@ test -e nuget.exe || ln -s NuGet.exe nuget.exe
 test -e nuget.targets || ln -s NuGet.targets nuget.targets
 cd  ..
 nuget restore Prototype.sln
-xbuild
+xbuild /p:Configuration=Release Prototype.sln
