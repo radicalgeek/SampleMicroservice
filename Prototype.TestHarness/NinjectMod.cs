@@ -4,7 +4,7 @@ using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
 using Prototype.Logger;
-using Prototype.Subscribers.Startables;
+
 
 namespace Prototype.TestHarness
 {
@@ -18,7 +18,7 @@ namespace Prototype.TestHarness
      
             
             Bind<IMessagePublisher>().To<MessagePublisher>();
-            Bind<IAutoSubscriber>().To<SampleAutoSubscriber>();
+
 
         }
     }
