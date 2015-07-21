@@ -37,6 +37,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Intergration", "Prototype.Tests.Intergration\Prototype.Tests.Intergration.csproj", "{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8FEA6D9-FE9A-456E-B76C-81DEC29635D9}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll = lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
