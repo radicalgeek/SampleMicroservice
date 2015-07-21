@@ -60,8 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
-    <Compile Include="IConfiguration.cs" />
     <Compile Include="IMessagePublisher.cs" />
     <Compile Include="Factory\BusFactory.cs" />
     <Compile Include="MessagePublisher.cs" />

@@ -21,6 +21,18 @@ namespace Prototype.Subscribers.Dispatcher
         }
 
         /// <summary>
+        /// This is a hack constructer to allow the passing in of a consumer for
+        /// testing.
+        /// </summary>
+        /// <param name="logger">instance of ILogger</param>
+        /// <param name="consumer">instance of IConsume</param>
+        public MessageDispatcher(ILogger logger, IConsume<IBusMessage> consumer)
+        {
+            _logger = logger;
+            _consumer = consumer;
+        }
+
+        /// <summary>
         /// Dispatch message to consumer
         /// </summary>
         /// <typeparam name="TMessage">the type of message (should be SampleMessge)</typeparam>

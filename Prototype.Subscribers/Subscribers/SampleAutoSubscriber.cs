@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Prototype.Logger;
 using Prototype.Subscribers.Dispatcher;
 using EasyNetQ;
@@ -40,7 +41,7 @@ namespace Prototype.Subscribers.Startables
 
         public void Stop()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

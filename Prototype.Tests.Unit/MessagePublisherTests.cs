@@ -21,7 +21,7 @@ namespace Prototype.Tests.Unit
             var logger = new Mock<ILogger>();
             var messagePublisher = new MessagePublisher(bus.Object, logger.Object);
 
-            messagePublisher.Publish(GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
 
             bus.Verify(o => o.Publish(It.IsAny<Object>()),Times.Once());
         }
@@ -36,7 +36,7 @@ namespace Prototype.Tests.Unit
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>(),It.IsAny<Object[]>()))
                 .Callback<string, Object[]>((message, obj) => invocations.Add(message));
 
-            messagePublisher.Publish(GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
 
             Assert.IsTrue(invocations[0].Contains("Publishing Message: "));
         }
@@ -51,7 +51,7 @@ namespace Prototype.Tests.Unit
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>()))
                 .Callback<string, Object[]>((message, obj) => invocations.Add(message));
 
-            messagePublisher.Publish(GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
 
             Assert.IsTrue(invocations[0].Contains("Publish Message succeded"));
         }
@@ -68,37 +68,11 @@ namespace Prototype.Tests.Unit
             bus.Setup(busObj => busObj.Publish(It.IsAny<object>()))
                 .Throws(new EasyNetQException("Test error"));
 
-            messagePublisher.Publish(GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
 
             Assert.IsTrue(invocations[0].Contains("Publish Message Failed: "));
         }
 
-        private dynamic GetTestNeedUserMessage()
-        {
-
-            dynamic need = new
-            {
-                UserUuid = Guid.NewGuid()
-            };
-
-            dynamic solutions = new
-            {
-
-            };
-
-            dynamic message = new
-            {
-                Uuid = Guid.NewGuid(),
-                Source = "UnitTest-Service",
-                PublishTime = DateTime.Now.ToUniversalTime(),
-                ModifiedBy = "UnitTest-Service",
-                ModifiedTime = DateTime.Now.ToUniversalTime(),
-                Method = "GET",
-                Need = need,
-                Solutions = solutions
-            };
-
-            return message;
-        }
+        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
 
 namespace Prototype.Logic.DataEntities
@@ -14,7 +15,12 @@ namespace Prototype.Logic.DataEntities
     /// </summary>
     public class SampleEntity : Entity
     {
-        public string Id { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public Guid NewGuidValue { get; set; }
+        public string NewStringValue { get; set; }
+        public int NewIntValue { get; set; }
+        public decimal NewDecimalValue { get; set; }
     }
 }
 
