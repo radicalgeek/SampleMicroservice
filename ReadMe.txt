@@ -52,11 +52,11 @@ running in docker containers.
 
 RabbitMQ command:
 
-docker run -d --hostname my-rabbit --name rook-rabbit -p 8080:15672 -p 5672:5672 rabbitmq:3-management
+docker run -d --hostname rook-rabbit --name rook-rabbit -p 8080:15672 -p 5672:5672 rabbitmq:3-management
 
 This will start up RabbitMQ on your local docker host, and expose the managment page on http://<<DockerHostIP>>:8080
 the message bus will be avaliable on <<dockerHostIP>>:5672
 
 MongoDB command:
 
-docker run --name rook-mongo -d mongo
+docker run id --hostname rookmongo --name rook-mongo  mongo

@@ -5,6 +5,9 @@ using Prototype.Logger;
 
 namespace Prototype.Infrastructure
 {
+    /// <summary>
+    /// Class to publish messages to the bus
+    /// </summary>
     public class MessagePublisher : IMessagePublisher
     {
         private readonly IBus _bus;
@@ -16,6 +19,10 @@ namespace Prototype.Infrastructure
             _logger = logger;
         }
 
+        /// <summary>
+        /// Publishs a messaage to the bus, with no delivery verification, response or callback
+        /// </summary>
+        /// <param name="message">The message to be published</param>
         public void Publish(dynamic message)
         {
             try

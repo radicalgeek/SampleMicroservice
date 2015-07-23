@@ -7,7 +7,8 @@ namespace Prototype.Infrastructure.Factory
     {
         public static IBus CreateMessageBus()
         {
-            var connectionString = ConfigurationManager.AppSettings["RabbitMQConnectionString"];
+            HostingEnvironment.GetEnvironmentVariable("RabbitMQConnectionString");
+            var connectionString = HostingEnvironment.GetEnvironmentVariable("RabbitMQConnectionString");
             return RabbitHutch.CreateBus(connectionString);
         }
     }
