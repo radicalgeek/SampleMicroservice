@@ -7,3 +7,5 @@ test -e nuget.targets || ln -s NuGet.targets nuget.targets
 cd  ..
 nuget restore Prototype.sln
 xbuild /p:Configuration=Release Prototype.sln
+
+
