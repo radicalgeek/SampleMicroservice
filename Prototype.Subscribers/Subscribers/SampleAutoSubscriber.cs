@@ -32,7 +32,7 @@ namespace Prototype.Subscribers.Startables
         public void Start()
         {
             //TODO: queue name strings to configs
-            var autoSubscriber = new AutoSubscriber(_bus, HostingEnvironment.GetEnvironmentVariable("Sample_Queue"))
+            var autoSubscriber = new AutoSubscriber(_bus, HostingEnvironment.GetEnvironmentVariable("QueueName"))
             {
                 AutoSubscriberMessageDispatcher = _messageDispatcher
             };
