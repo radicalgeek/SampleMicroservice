@@ -66,7 +66,8 @@ namespace Prototype.Tests.Unit
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            var entityToRemove = Entities.Single(e => e.Id == id);
+            Entities.Remove(entityToRemove);
         }
 
         public void Delete(SampleEntity entity)

@@ -59,9 +59,21 @@ namespace Prototype.Logic
         /// <param name="message">The dynamic message object from the bus containing details of the item to be deleted</param>
         private void DeleteSampleEntities(dynamic message)
         {
-            //TODO: ensure this method can handle both single items and collections
-            SampleEntity entity = MapMessageToEntities(message);
-            _sampleEntityRepository.Delete(e => e.Id == entity.Id);
+            foreach (var need in message.Needs)
+            {
+                try
+                {
+                    _logger.Info("Removing entity {0}", need.SampleEntity);
+                    string id = need.SampleEntity.ToString();
+                    _sampleEntityRepository.Delete(id);
+                    _logger.Info("Entity {0} Deleted", need.SampleEntity);
+                }
+                catch (Exception ex )
+                {
+                    _logger.Error(ex, "Unable to delete entity {0}", need.SampleEntity);
+                }
+            }
+            
         }
 
         /// <summary>
@@ -110,6 +122,7 @@ namespace Prototype.Logic
             {
                 _sampleEntityRepository.Update(entity);
                 _logger.Info("SampleEntities updated for message {0}", message.Uuid);
+                PublishSuccessMessage(message, entity);
             }
             catch (Exception ex)
             {
@@ -140,18 +153,6 @@ namespace Prototype.Logic
                 _logger.Error(ex, "Unable to store new SampleEntities from message {0}", message.Uuid);
                 //TODO: publish error message to bus
             }
-        }
-
-
-        private void PublishFaliureMessage()
-        {
-            dynamic message = new
-            {
-                value1 = 1,
-                value2 = 2,
-                value3 = 3,
-            };        
-            _publisher.Publish(message);            
         }
 
         private void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities )

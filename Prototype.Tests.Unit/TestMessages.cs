@@ -157,5 +157,32 @@ namespace Prototype.Tests.Unit
 
             return message;
         }
+
+        public static dynamic GetTestDeleteSampleEntityMesssage()
+        {
+            var solutions = new List<dynamic>();
+            var needs = new List<dynamic>();
+            var id = Guid.NewGuid();
+
+            dynamic need1 = new ExpandoObject();
+            need1.SampleEntity = id;
+            needs.Add(need1);
+
+            dynamic solution1 = new ExpandoObject();
+            solutions.Add(solution1);
+
+            dynamic message = new ExpandoObject();
+
+            message.Uuid = Guid.NewGuid();
+            message.Source = "UnitTest-Service";
+            message.PublishTime = DateTime.Now.ToUniversalTime();
+            message.ModifiedBy = "UnitTest-Service";
+            message.ModifiedTime = DateTime.Now.ToUniversalTime();
+            message.Method = "DELETE";
+            message.Needs = needs;
+            message.Solutions = solutions;
+
+            return message;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Prototype.Subscribers.Startables
         }
 
         /// <summary>
-        /// Locates instances of IConsumer in this assembly and subscribes to those messages
+        /// Locates instances of IConsum in this assembly and subscribes to those messages
         /// </summary>
         public void Start()
         {
