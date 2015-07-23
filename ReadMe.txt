@@ -44,11 +44,26 @@ RabbitMQ
 MongoDB
 
 ---------------------------------------------------------------------------------
-Useage:
+Usege:
 
 In order to run this service in your development environment (your PC), ensure
 you have installed boot2docker. Once you have it installed you will need to get RabbitMQ and MongoDB
 running in docker containers. 
+
+first ensure you have run 
+$boot2docker init
+
+ followed by 
+ 
+ $boot2docker up
+
+next, find the IP address of your boot2docker vm. you can do this with the command
+
+$boot2docker ip
+
+now add this IP address to your host file, with a domain entry to represent the message queue and database servers. 
+
+
 
 RabbitMQ command:
 
