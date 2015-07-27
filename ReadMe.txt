@@ -44,35 +44,40 @@ RabbitMQ
 MongoDB
 
 ---------------------------------------------------------------------------------
-Useage:
+Usage:
+
+Windows Debug - Manual.
 
 In order to run this service in your development environment (your PC), ensure
 you have installed boot2docker. Once you have it installed you will need to get RabbitMQ and MongoDB
-running in docker containers. 
+running in docker containers, as well as storage containers. 
 
-first download and install boot2docker, then launch it from the start menu icon. 
+forst create the following file path on your local machine 
 
-next initilise your boot2docker vm
+C:\var\log\rook
+
+This path will be used to store the logs when the service is running. When the service runs in a docker container environment, this path will resolve to the 
+persistant logging storage container.
+
+Now download and install boot2docker, then launch it from the start menu icon. Text initilise your boot2docker vm
 
 $ boot2docker init
 
-and start it up
+Run any export commands the output tells you to, then start the vm:
 
 $ boot2docker up
 
-It is important in most environments to start up the message bus first. It dosn't matter to much in dev 
-as you will not be connecting to this container from another container. Instead we first need ensure we can connect to any containers we create.
-
-First get the ip address of your boot2docker VM
+It is important in most environments to start up the message bus first. But before we do that, 
+we first need ensure we can connect to any containers we create. Get the ip address of your boot2docker VM
 
 $ boot2docker ip
 
-for this sample add the following enteries to your host file, replacing the IP with the IP address reported by the last command
+For this sample add the following enteries to your host file, replacing the IP with the IP address reported by the last command
 
-192.168.59.103	rook-rabbitmq
+192.168.59.103	rook-queue
 192.168.59.103	rook-sample-db
 
-next run the following comands to set up the boot2docker-vm
+Now run the following comands to set up the boot2docker-vm
 
 $ boot2docker ssh
 $ mkdir /var/queue
@@ -81,26 +86,34 @@ $ mkdir /var/logs/rook
 $ mkdir /var/data/
 $ mkdir /var/data/rook
 
-
-RabbitMQ:
-
-you are now ready to fire up the RabbitMQ container and its data store
+You are now ready to fire up the RabbitMQ container and its data store
 
 $ docker create --name=rook-queue-datastore -v=//var/queue:/var/lib/rabbitmq/mnesia debian:wheezy
+
 $ docker run -d --hostname rook-queue --name rook-queue -p 8080:15672 -p 5672:5672 --volumes-from rook-queue-datastore rabbitmq:3-management
+
+This will start up RabbitMQ on your local docker host, and expose the managment page on http://rook-queue:8080
+the message bus will be avaliable on rook-queue:5672
+
+Next create your logging storage container
+
 $ docker run --name rook-logs -v //var/log/rook:/var/log/rook debian:wheezy
 
+And Fianly MongoDB
 
-This will start up RabbitMQ on your local docker host, and expose the managment page on http://rook-rabbitmq:8080
-the message bus will be avaliable on <<dockerHostIP>>:5672
+$ docker run -d --hostname rook-sample-db -p 27017:27017 --name rook-sample-db -v //var/data/rook:/data/db  mongo --smallfiles
 
-MongoDB:
 
-In order to persist data we need a data container. this sample is configured to use MongoDB
+Hitting debug in visual studio will then fire up the service in a console window, and connect to the database and queue you have
+in docker containers. 
 
-$ docker run -d --hostname rook-sample-db --name rook-sample-db -v /var/data/rook:/data/db  mongo:tag
+--------------------------------------------------------------------------------------------
+
+
+
+
 
 
 To run this app in a docker container
 
-$ docker run --name rook-sample --link rook-sample-db:mongo
+$ docker run  --name rook-sample --link rook-sample-db:db --link rook-queue:queue  --volumes-from rook-logs
