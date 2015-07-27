@@ -56,6 +56,7 @@ forst create the following file path on your local machine
 
 C:\var\log\rook
 
+
 This path will be used to store the logs when the service is running. When the service runs in a docker container environment, this path will resolve to the 
 persistant logging storage container.
 

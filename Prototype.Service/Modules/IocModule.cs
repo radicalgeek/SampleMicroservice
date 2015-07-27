@@ -1,9 +1,11 @@
 ﻿using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using MongoRepository;
 using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
 using Prototype.Logger;
+using Prototype.Logic.DataEntities;
 using Prototype.Subscribers.Dispatcher;
 using Prototype.Subscribers.Startables;
 
@@ -25,6 +27,7 @@ namespace Prototype.Service.Modules
             Bind<IMessagePublisher>().To<MessagePublisher>();
             Bind<IAutoSubscriber>().To<SampleAutoSubscriber>();
             Bind<IAutoSubscriberMessageDispatcher>().To<MessageDispatcher>();
+            Bind(typeof(IRepository<>)).To(typeof(MongoRepository<>));
 
         }
     }
