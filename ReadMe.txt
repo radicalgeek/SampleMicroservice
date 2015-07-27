@@ -72,12 +72,24 @@ for this sample add the following enteries to your host file, replacing the IP w
 192.168.59.103	rook-rabbitmq
 192.168.59.103	rook-sample-db
 
+next run the following comands to set up the boot2docker-vm
+
+$ boot2docker ssh
+$ mkdir /var/queue
+$ mkdir /var/logs/
+$ mkdir /var/logs/rook
+$ mkdir /var/data/
+$ mkdir /var/data/rook
+
 
 RabbitMQ:
 
-you are now ready to fire up the RabbitMQ container
+you are now ready to fire up the RabbitMQ container and its data store
 
-$ docker run -d --hostname rook-rabbitmq --name rook-rabbitmq -p 8080:15672 -p 5672:5672 rabbitmq:3-management
+$ docker create --name=rook-queue-datastore -v=//var/queue:/var/lib/rabbitmq/mnesia debian:wheezy
+$ docker run -d --hostname rook-queue --name rook-queue -p 8080:15672 -p 5672:5672 --volumes-from rook-queue-datastore rabbitmq:3-management
+$ docker run --name rook-logs -v //var/log/rook:/var/log/rook debian:wheezy
+
 
 This will start up RabbitMQ on your local docker host, and expose the managment page on http://rook-rabbitmq:8080
 the message bus will be avaliable on <<dockerHostIP>>:5672
@@ -86,4 +98,9 @@ MongoDB:
 
 In order to persist data we need a data container. this sample is configured to use MongoDB
 
-$ docker run -d --hostname rook-sample-db --name rook-sample-db  mongo
+$ docker run -d --hostname rook-sample-db --name rook-sample-db -v /var/data/rook:/data/db  mongo:tag
+
+
+To run this app in a docker container
+
+$ docker run --name rook-sample --link rook-sample-db:mongo
