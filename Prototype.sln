@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27E2644F-6D62-489F-9A47-8AA4F7F6417D}"
 	ProjectSection(SolutionItems) = preProject
@@ -41,6 +41,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8FEA6D9-FE9A-456E-B76C-81DEC29635D9}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll = lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+		lib\Ninject.dll = lib\Ninject.dll
 	EndProjectSection
 EndProject
 Global
@@ -54,6 +55,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
+		RunInDocker-OSX|Any CPU = RunInDocker-OSX|Any CPU
+		RunInDocker-OSX|Mixed Platforms = RunInDocker-OSX|Mixed Platforms
+		RunInDocker-OSX|x86 = RunInDocker-OSX|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,6 +76,12 @@ Global
 		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -88,6 +98,12 @@ Global
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|x86.ActiveCfg = Release|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.Build.0 = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -105,6 +121,11 @@ Global
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|x86.ActiveCfg = Release|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|x86.Build.0 = Release|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|x86
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -121,6 +142,12 @@ Global
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|x86.ActiveCfg = Release|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -133,9 +160,13 @@ Global
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug-OSX|x86.Build.0 = Debug-OSX|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|Any CPU.ActiveCfg = Release|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{98814830-B35F-4374-94D7-D230825A1351}.Release|Mixed Platforms.Build.0 = Release|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|x86.ActiveCfg = Release|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|x86.Build.0 = Release|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|x86
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -152,6 +183,12 @@ Global
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -168,6 +205,12 @@ Global
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|x86.ActiveCfg = Release|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -182,8 +225,13 @@ Global
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -198,8 +246,13 @@ Global
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

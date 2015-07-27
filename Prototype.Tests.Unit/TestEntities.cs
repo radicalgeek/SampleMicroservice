@@ -26,7 +26,7 @@ namespace Prototype.Tests.Unit
             var entity2 = new SampleEntity()
             {
                 CreatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime(),
-                Id = message.Needs[0].SampleEntity.ToString(),
+                Id = Guid.NewGuid().ToString(),
                 NewDecimalValue = 123.45M,
                 NewGuidValue = Guid.NewGuid(),
                 NewIntValue = 1,

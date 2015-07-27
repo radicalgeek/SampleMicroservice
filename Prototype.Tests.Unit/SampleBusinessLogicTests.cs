@@ -378,63 +378,165 @@ namespace Prototype.Tests.Unit
 
         }
 
-        
+        [TestMethod]
+        public void PutOperationReturnsUpdatedEntity()
+        {
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestUpdateSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
+
+
+            message.Solutions[0].NewStringValue = "Updated Test";
+            message.Solutions[0].NewIntValue = 456;
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(responseList[0].Solutions[0].NewStringValue == "Updated Test");
+
+        }
+
+        [TestMethod]
+        public void PutOperationLogsUpdateFailed()
+        {
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new Mock<IRepository<SampleEntity>>(); 
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object);
+
+            var message = TestMessages.GetTestUpdateSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<Exception,string, object[]>((ex,msg, obj) => logResponse.Add(msg));
+            repo.Setup(r => r.Update(It.IsAny<List<SampleEntity>>())).Throws(new Exception("test exception"));
+
+
+            message.Solutions[0].NewStringValue = "Updated Test";
+            message.Solutions[0].NewIntValue = 456;
+
+
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[0].Contains("Unable to update SampleEntities for message"));
+
+        }
 
         #endregion
 
         #region Delete
 
+        [TestMethod]
+        public void DeleteOperationRemovesEntity()
+        {
+
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestDeleteSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntities(message);
+            
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            ;
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(repo.Entities.Count == 1);
+
+        }
+
+        [TestMethod]
+        public void DeleteOperationLogsEntityToBeRemoved()
+        {
+
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestDeleteSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntities(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[0].Contains("Removing entity"));
+
+        }
+
+        [TestMethod]
+        public void DeleteOperationLogsEntityIsRemoved()
+        {
+
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new FakeRepository();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo);
+
+            var message = TestMessages.GetTestDeleteSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntities(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
+
+            repo.Entities = entitys;
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[1].Contains("Deleted"));
+
+        }
+
+        [TestMethod]
+        public void DeleteOperationLogsUnableToRemoveEntity()
+        {
+
+            var publisher = new Mock<IMessagePublisher>();
+            var logger = new Mock<ILogger>();
+            var repo = new Mock<IRepository<SampleEntity>>();
+            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object);
+
+            var message = TestMessages.GetTestDeleteSampleEntityMesssage();
+            var entitys = TestEntities.SetUpSampleEntities(message);
+            var logResponse = new List<string>();
+            var responseList = new List<dynamic>();
+            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
+                .Callback<Exception, string, object[]>((ex, msg, obj) => logResponse.Add(msg));
+            repo.Setup(r => r.Delete(It.IsAny<string>())).Throws(new Exception("test exception"));
+
+            logicClass.RouteSampleMessage(message);
+
+            Assert.IsTrue(logResponse[0].Contains("Unable to delete entity"));
+
+        }
+
+
         #endregion
 
 
-        private dynamic GetMockCollection(List<SampleEntity> entities)
-        {
-            var message = string.Empty;
 
-            var serverSettings = new MongoServerSettings()
-            {
-                GuidRepresentation = MongoDB.Bson.GuidRepresentation.Standard,
-                ReadEncoding = new UTF8Encoding(),
-                ReadPreference = new ReadPreference(),
-                WriteConcern = new WriteConcern(),
-                WriteEncoding = new UTF8Encoding()
-            };
-
-            var server = new Mock<MongoServer>(serverSettings);
-            server.Setup(s => s.Settings).Returns(serverSettings);
-            server.Setup(s => s.IsDatabaseNameValid(It.IsAny<string>(), out message)).Returns(true);
-
-            var databaseSettings = new MongoDatabaseSettings()
-            {
-                GuidRepresentation = MongoDB.Bson.GuidRepresentation.Standard,
-                ReadEncoding = new UTF8Encoding(),
-                ReadPreference = new ReadPreference(),
-                WriteConcern = new WriteConcern(),
-                WriteEncoding = new UTF8Encoding()
-            };
-
-            var database = new Mock<MongoDatabase>(server.Object, "test", databaseSettings);
-            database.Setup(db => db.Settings).Returns(databaseSettings);
-            database.Setup(db => db.IsCollectionNameValid(It.IsAny<string>(), out message)).Returns(true);
-
-            var collectionSettings = new MongoCollectionSettings()
-            {
-                AssignIdOnInsert = true,
-                GuidRepresentation = GuidRepresentation.Standard,
-                ReadEncoding = (UTF8Encoding) Encoding.UTF8,
-                ReadPreference = ReadPreference.Primary,
-                WriteConcern = WriteConcern.Acknowledged,
-                WriteEncoding = (UTF8Encoding) Encoding.UTF8,
-            };
-
-            var collection = new Mock<MongoCollection<SampleEntity>>(database.Object, "SampleEntity", collectionSettings);
-            foreach (var sampleEntity in entities)
-            {
-                collection.Object.Insert(sampleEntity);
-            }
-
-            return collection.Object;
-        }
     }
 
  
