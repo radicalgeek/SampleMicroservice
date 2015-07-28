@@ -16,7 +16,7 @@ namespace Prototype.Tests.Unit
             var entity1 = new SampleEntity()
             {
                 CreatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime(),
-                Id = message.Needs[0].SampleEntity.ToString(),
+                Id = message.Needs[0].Uuid.ToString(),
                 NewDecimalValue = 123.45M,
                 NewGuidValue = Guid.NewGuid(),
                 NewIntValue = 1,
@@ -45,11 +45,11 @@ namespace Prototype.Tests.Unit
             var entity1 = new SampleEntity()
             {
                 CreatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime(),
-                Id = message.Solutions[0].Id.ToString(),
-                NewDecimalValue = message.Solutions[0].NewDecimalValue,
-                NewGuidValue = message.Solutions[0].NewGuidValue,
-                NewIntValue = message.Solutions[0].NewIntValue,
-                NewStringValue = message.Solutions[0].NewStringValue,
+                Id = message.Needs[0].Uuid.ToString(),
+                NewDecimalValue = message.Needs[0].NewDecimalValue,
+                NewGuidValue = message.Needs[0].NewGuidValue,
+                NewIntValue = message.Needs[0].NewIntValue,
+                NewStringValue = message.Needs[0].NewStringValue,
                 UpdatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime()
             };
             entitys.Add(entity1);

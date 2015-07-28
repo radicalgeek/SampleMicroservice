@@ -63,14 +63,14 @@ namespace Prototype.Logic
             {
                 try
                 {
-                    _logger.Info("Removing entity {0}", need.SampleEntity);
-                    string id = need.SampleEntity.ToString();
+                    _logger.Info("Removing entity {0}", need.Uuid);
+                    string id = need.Uuid.ToString();
                     _sampleEntityRepository.Delete(id);
-                    _logger.Info("Entity {0} Deleted", need.SampleEntity);
+                    _logger.Info("Entity {0} Deleted", need.Uuid);
                 }
                 catch (Exception ex )
                 {
-                    _logger.Error(ex, "Unable to delete entity {0}", need.SampleEntity);
+                    _logger.Error(ex, "Unable to delete entity {0}", need.Uuid);
                 }
             }
             
@@ -88,14 +88,14 @@ namespace Prototype.Logic
             {
                 try
                 {
-                    string query = need.SampleEntity.ToString();
+                    string query = need.Uuid.ToString();
                     var entity = _sampleEntityRepository.GetById(query);
                     entities.Add(entity);
                     _logger.Info("SampleEntity {0} located", entity.Id);
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex, "Unable to locate SampleEntity {0}", need.SampleEntity.ToString());
+                    _logger.Error(ex, "Unable to locate SampleEntity {0}", need.Uuid.ToString());
                 }
                 if (entities.Count > 0)
                 {
@@ -186,13 +186,13 @@ namespace Prototype.Logic
         private static List<SampleEntity> MapMessageToEntities(dynamic message)
         {
             var newEntities = new List<SampleEntity>();
-            foreach (var solution in message.Solutions)
+            foreach (var need in message.Needs)
             {
                 Guid id;
 
                 try
                 {
-                    id = solution.Id;
+                    id = need.Uuid;
                 }
                 catch (RuntimeBinderException)
                 {
@@ -202,7 +202,7 @@ namespace Prototype.Logic
                 DateTime createdDate;
                 try
                 {
-                    createdDate = solution.CreatedDate;
+                    createdDate = need.CreatedDate;
                 }
                 catch (RuntimeBinderException)
                 {
@@ -214,10 +214,10 @@ namespace Prototype.Logic
                     Id = id.ToString(),
                     CreatedDate = createdDate,
                     UpdatedDate = DateTime.Now.ToUniversalTime(),
-                    NewGuidValue = solution.NewGuidValue,
-                    NewStringValue = solution.NewStringValue,
-                    NewIntValue = solution.NewIntValue,
-                    NewDecimalValue = solution.NewDecimalValue
+                    NewGuidValue = need.NewGuidValue,
+                    NewStringValue = need.NewStringValue,
+                    NewIntValue = need.NewIntValue,
+                    NewDecimalValue = need.NewDecimalValue
 
                 };
                 newEntities.Add(newEntity);

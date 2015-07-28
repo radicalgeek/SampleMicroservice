@@ -218,7 +218,7 @@ namespace Prototype.Tests.Unit
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
 
-            Assert.IsTrue(message.Needs[0].SampleEntity.ToString() == responseList[0].Solutions[0].Uuid.ToString());
+            Assert.IsTrue(message.Needs[0].Uuid.ToString() == responseList[0].Solutions[0].Uuid.ToString());
 
         }
 
@@ -314,8 +314,8 @@ namespace Prototype.Tests.Unit
             var responseList = new List<dynamic>();
             publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
 
-            message.Solutions[0].NewStringValue = "Updated Test";
-            message.Solutions[0].NewIntValue = 456;
+            message.Needs[0].NewStringValue = "Updated Test";
+            message.Needs[0].NewIntValue = 456;
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
@@ -341,8 +341,8 @@ namespace Prototype.Tests.Unit
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
 
-            message.Solutions[0].NewStringValue = "Updated Test";
-            message.Solutions[0].NewIntValue = 456;
+            message.Needs[0].NewStringValue = "Updated Test";
+            message.Needs[0].NewIntValue = 456;
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
@@ -368,8 +368,8 @@ namespace Prototype.Tests.Unit
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
 
-            message.Solutions[0].NewStringValue = "Updated Test";
-            message.Solutions[0].NewIntValue = 456;
+            message.Needs[0].NewStringValue = "Updated Test";
+            message.Needs[0].NewIntValue = 456;
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
@@ -395,8 +395,8 @@ namespace Prototype.Tests.Unit
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
 
-            message.Solutions[0].NewStringValue = "Updated Test";
-            message.Solutions[0].NewIntValue = 456;
+            message.Needs[0].NewStringValue = "Updated Test";
+            message.Needs[0].NewIntValue = 456;
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
@@ -423,8 +423,8 @@ namespace Prototype.Tests.Unit
             repo.Setup(r => r.Update(It.IsAny<List<SampleEntity>>())).Throws(new Exception("test exception"));
 
 
-            message.Solutions[0].NewStringValue = "Updated Test";
-            message.Solutions[0].NewIntValue = 456;
+            message.Needs[0].NewStringValue = "Updated Test";
+            message.Needs[0].NewIntValue = 456;
 
 
             logicClass.RouteSampleMessage(message);
@@ -451,7 +451,7 @@ namespace Prototype.Tests.Unit
             
             var responseList = new List<dynamic>();
             publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
-            ;
+            
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
