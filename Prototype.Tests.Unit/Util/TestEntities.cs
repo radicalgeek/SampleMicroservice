@@ -16,7 +16,7 @@ namespace Prototype.Tests.Unit
             var entity1 = new SampleEntity()
             {
                 CreatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime(),
-                Id = message.Needs[0].Uuid.ToString(),
+                Id = message.Needs[0].SampleUuid.ToString(),
                 NewDecimalValue = 123.45M,
                 NewGuidValue = Guid.NewGuid(),
                 NewIntValue = 1,
@@ -45,7 +45,7 @@ namespace Prototype.Tests.Unit
             var entity1 = new SampleEntity()
             {
                 CreatedDate = DateTime.Now.AddMonths(-1).ToUniversalTime(),
-                Id = message.Needs[0].Uuid.ToString(),
+                Id = message.Needs[0].SampleUuid.ToString(),
                 NewDecimalValue = message.Needs[0].NewDecimalValue,
                 NewGuidValue = message.Needs[0].NewGuidValue,
                 NewIntValue = message.Needs[0].NewIntValue,

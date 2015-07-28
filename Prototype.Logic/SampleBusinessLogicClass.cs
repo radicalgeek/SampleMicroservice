@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CSharp.RuntimeBinder;
@@ -21,13 +22,14 @@ namespace Prototype.Logic
         private IRepository<SampleEntity,string> _sampleEntityRepository = new MongoRepository<SampleEntity,string>();
         private ILogger _logger;
         private IMessagePublisher _publisher;
+        private IHostingEnvironment _environment;
 
-        public SampleBusinessLogicClass(ILogger logger, IMessagePublisher publisher, IRepository<SampleEntity, string> sampleRepository)
+        public SampleBusinessLogicClass(ILogger logger, IMessagePublisher publisher, IRepository<SampleEntity, string> sampleRepository, IHostingEnvironment environment)
         {
             _logger = logger;
             _publisher = publisher;
             _sampleEntityRepository = sampleRepository;
-
+            _environment = environment;
         }
 
         /// <summary>
@@ -36,21 +38,51 @@ namespace Prototype.Logic
         /// <param name="message">dynamic message object from the bus keeps contracts loosly coupled</param>
         public void RouteSampleMessage(dynamic message)
         {
-            switch ((string) message.Method.ToString())
+            if (ShouldTryProcessingMessage(message))
             {
-                case "GET":
-                    GetSampleEntities(message);
-                    break;
-                case "POST":
-                    CreateSampleEntities(message);
-                    break;
-                case "PUT":
-                    UpdateSampleEntities(message);
-                    break;
-                case "DELETE":
-                    DeleteSampleEntities(message);
-                    break;
+                switch ((string) message.Method.ToString())
+                {
+                    case "GET":
+                        GetSampleEntities(message);
+                        break;
+                    case "POST":
+                        CreateSampleEntities(message);
+                        break;
+                    case "PUT":
+                        UpdateSampleEntities(message);
+                        break;
+                    case "DELETE":
+                        DeleteSampleEntities(message);
+                        break;
+                }
             }
+        }
+
+        public bool ShouldTryProcessingMessage(dynamic message)
+        {
+
+            var servicename = _environment.GetServiceName();
+            int currentMajorVersion = _environment.GetServiceVersion();
+
+            if (servicename == message.ModifiedBy)
+                return false;
+
+            try
+            {
+                foreach (var versionRequirement in message.CompatibleServiceVersions)
+                {
+                    if (versionRequirement.Service == servicename)
+                    {
+                        if (versionRequirement.Version > currentMajorVersion)
+                            return false;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+            return true;
         }
 
         /// <summary>
@@ -63,14 +95,14 @@ namespace Prototype.Logic
             {
                 try
                 {
-                    _logger.Info("Removing entity {0}", need.Uuid);
-                    string id = need.Uuid.ToString();
+                    _logger.Info("Removing entity {0}", need.SampleUuid);
+                    string id = need.SampleUuid.ToString();
                     _sampleEntityRepository.Delete(id);
-                    _logger.Info("Entity {0} Deleted", need.Uuid);
+                    _logger.Info("Entity {0} Deleted", need.SampleUuid);
                 }
                 catch (Exception ex )
                 {
-                    _logger.Error(ex, "Unable to delete entity {0}", need.Uuid);
+                    _logger.Error(ex, "Unable to delete entity {0}", need.SampleUuid);
                 }
             }
             
@@ -82,20 +114,20 @@ namespace Prototype.Logic
         /// <param name="message">The dynamic message from the bus containig the details of the item to retrive</param>
         private void GetSampleEntities(dynamic message)
         {
-            _logger.Info("Locating SampleEntities for message: {0}", message.Uuid);
+            _logger.Info("Locating SampleEntities for message: {0}", message.SampleUuid);
             var entities = new List<SampleEntity>();
             foreach (var need in message.Needs)
             {
                 try
                 {
-                    string query = need.Uuid.ToString();
+                    string query = need.SampleUuid.ToString();
                     var entity = _sampleEntityRepository.GetById(query);
                     entities.Add(entity);
                     _logger.Info("SampleEntity {0} located", entity.Id);
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex, "Unable to locate SampleEntity {0}", need.Uuid.ToString());
+                    _logger.Error(ex, "Unable to locate SampleEntity {0}", need.SampleUuid.ToString());
                 }
                 if (entities.Count > 0)
                 {
@@ -117,16 +149,16 @@ namespace Prototype.Logic
         private void UpdateSampleEntities(dynamic message)
         {
             var entity = MapMessageToEntities(message);
-            _logger.Info("Updating SampleEntities from message: {0}", message.Uuid);
+            _logger.Info("Updating SampleEntities from message: {0}", message.SampleUuid);
             try
             {
                 _sampleEntityRepository.Update(entity);
-                _logger.Info("SampleEntities updated for message {0}", message.Uuid);
+                _logger.Info("SampleEntities updated for message {0}", message.SampleUuid);
                 PublishSuccessMessage(message, entity);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unable to update SampleEntities for message {0}", message.Uuid);
+                _logger.Error(ex, "Unable to update SampleEntities for message {0}", message.SampleUuid);
             }
         }
 
@@ -137,7 +169,7 @@ namespace Prototype.Logic
         private void CreateSampleEntities(dynamic message)
         {
             var entities = MapMessageToEntities(message);
-            _logger.Info("Storing new SampleEntities from message: {0}", message.Uuid);
+            _logger.Info("Storing new SampleEntities from message: {0}", message.SampleUuid);
             try
             {
                 _sampleEntityRepository.Add(entities);
@@ -150,7 +182,7 @@ namespace Prototype.Logic
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unable to store new SampleEntities from message {0}", message.Uuid);
+                _logger.Error(ex, "Unable to store new SampleEntities from message {0}", message.SampleUuid);
                 //TODO: publish error message to bus
             }
         }
@@ -158,13 +190,13 @@ namespace Prototype.Logic
         private void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities )
         {
             orignalMessage.ModifiedTime = DateTime.Now.ToUniversalTime();
-            orignalMessage.ModifiedBy = "Sample Service";
+            orignalMessage.ModifiedBy = _environment.GetServiceName();
             var solutions = new List<dynamic>();
 
             foreach (var sampleEntity in entities)
             {
                 dynamic solution = new ExpandoObject();
-                solution.Uuid = sampleEntity.Id;
+                solution.SampleUuid = sampleEntity.Id;
                 solution.NewGuidValue = sampleEntity.NewGuidValue;
                 solution.NewStringValue = sampleEntity.NewStringValue;
                 solution.NewIntValue = sampleEntity.NewIntValue;
@@ -192,7 +224,7 @@ namespace Prototype.Logic
 
                 try
                 {
-                    id = need.Uuid;
+                    id = need.SampleUuid;
                 }
                 catch (RuntimeBinderException)
                 {

@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HostingEnvironment.cs" />
+    <Compile Include="IHostingEnvironment.cs" />
     <Compile Include="IMessagePublisher.cs" />
     <Compile Include="Factory\BusFactory.cs" />
     <Compile Include="MessagePublisher.cs" />

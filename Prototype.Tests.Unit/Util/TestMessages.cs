@@ -15,7 +15,7 @@ namespace Prototype.Tests.Unit
 
             dynamic need = new
             {
-                UserUuid = Guid.NewGuid()
+                UserSampleUuid = Guid.NewGuid()
             };
 
             dynamic solutions = new
@@ -25,7 +25,7 @@ namespace Prototype.Tests.Unit
 
             dynamic message = new
             {
-                Uuid = Guid.NewGuid(),
+                SampleUuid = Guid.NewGuid(),
                 Source = "UnitTest-Service",
                 PublishTime = DateTime.Now.ToUniversalTime(),
                 ModifiedBy = "UnitTest-Service",
@@ -38,7 +38,7 @@ namespace Prototype.Tests.Unit
             return message;
         }
 
-        //incorrect
+        //correct
         public static dynamic GetTestCreateSampleEntityMessageWithMultiple()
         {
             var solutions = new List<dynamic>();
@@ -46,7 +46,7 @@ namespace Prototype.Tests.Unit
 
             dynamic need1 = new ExpandoObject();
 
-            need1.Uuid = new Guid();
+            need1.SampleUuid = new Guid();
             need1.NewStringValue = "Test1";
             need1.NewIntValue = 123;
             need1.NewDecimalValue = 134.45M;
@@ -55,7 +55,7 @@ namespace Prototype.Tests.Unit
 
             dynamic need2 = new ExpandoObject();
 
-            need2.Uuid = new Guid();
+            need2.SampleUuid = new Guid();
             need2.NewStringValue = "Test2";
             need2.NewIntValue = 123;
             need2.NewDecimalValue = 134.45M;
@@ -64,7 +64,7 @@ namespace Prototype.Tests.Unit
 
             dynamic message = new ExpandoObject();
 
-            message.Uuid = Guid.NewGuid();
+            message.SampleUuid = Guid.NewGuid();
             message.Source = "UnitTest-Service";
             message.PublishTime = DateTime.Now.ToUniversalTime();
             message.ModifiedBy = "UnitTest-Service";
@@ -76,7 +76,7 @@ namespace Prototype.Tests.Unit
             return message;
         }
 
-        //incorrect
+        //correct
         public static dynamic GetTestCreateSampleEntityMessage()
         {
             var solutions = new List<dynamic>();
@@ -92,7 +92,7 @@ namespace Prototype.Tests.Unit
 
             dynamic message = new ExpandoObject();
 
-            message.Uuid = Guid.NewGuid();
+            message.SampleUuid = Guid.NewGuid();
             message.Source = "UnitTest-Service";
             message.PublishTime = DateTime.Now.ToUniversalTime();
             message.ModifiedBy = "UnitTest-Service";
@@ -113,12 +113,12 @@ namespace Prototype.Tests.Unit
 
             dynamic need1 = new ExpandoObject();
 
-            need1.Uuid = Guid.NewGuid();
+            need1.SampleUuid = Guid.NewGuid();
             needs.Add(need1);
 
             dynamic message = new ExpandoObject();
 
-            message.Uuid = Guid.NewGuid();
+            message.SampleUuid = Guid.NewGuid();
             message.Source = "UnitTest-Service";
             message.PublishTime = DateTime.Now.ToUniversalTime();
             message.ModifiedBy = "UnitTest-Service";
@@ -131,7 +131,7 @@ namespace Prototype.Tests.Unit
             return message;
         }
 
-        //incorrect
+        //correct
         public static dynamic GetTestUpdateSampleEntityMesssage()
         {
             var solutions = new List<dynamic>();
@@ -140,7 +140,7 @@ namespace Prototype.Tests.Unit
 
             dynamic need1 = new ExpandoObject();
 
-            need1.Uuid = id;
+            need1.SampleUuid = id;
             need1.NewGuidValue = Guid.NewGuid();
             need1.NewStringValue = "Test";
             need1.NewIntValue = 123;
@@ -149,7 +149,7 @@ namespace Prototype.Tests.Unit
 
             dynamic message = new ExpandoObject();
 
-            message.Uuid = Guid.NewGuid();
+            message.SampleUuid = Guid.NewGuid();
             message.Source = "UnitTest-Service";
             message.PublishTime = DateTime.Now.ToUniversalTime();
             message.ModifiedBy = "UnitTest-Service";
@@ -161,7 +161,7 @@ namespace Prototype.Tests.Unit
             return message;
         }
 
-        //incorrect
+        //correct
         public static dynamic GetTestDeleteSampleEntityMesssage()
         {
             var solutions = new List<dynamic>();
@@ -169,7 +169,7 @@ namespace Prototype.Tests.Unit
             var id = Guid.NewGuid();
 
             dynamic need1 = new ExpandoObject();
-            need1.Uuid = id;
+            need1.SampleUuid = id;
             needs.Add(need1);
 
             dynamic solution1 = new ExpandoObject();
@@ -177,7 +177,7 @@ namespace Prototype.Tests.Unit
 
             dynamic message = new ExpandoObject();
 
-            message.Uuid = Guid.NewGuid();
+            message.SampleUuid = Guid.NewGuid();
             message.Source = "UnitTest-Service";
             message.PublishTime = DateTime.Now.ToUniversalTime();
             message.ModifiedBy = "UnitTest-Service";
@@ -185,6 +185,40 @@ namespace Prototype.Tests.Unit
             message.Method = "DELETE";
             message.Needs = needs;
             message.Solutions = solutions;
+
+            return message;
+        }
+
+        public static dynamic GetTestVersion1Message()
+        {
+            var solutions = new List<dynamic>();
+            var needs = new List<dynamic>();
+            var versions = new List<dynamic>();
+            var id = Guid.NewGuid();
+
+            dynamic version1 = new ExpandoObject();
+            version1.Service = "SampleService";
+            version1.Version = 1;
+            versions.Add(version1);
+
+            dynamic need1 = new ExpandoObject();
+            need1.SampleUuid = id;
+            needs.Add(need1);
+
+            dynamic solution1 = new ExpandoObject();
+            solutions.Add(solution1);
+
+            dynamic message = new ExpandoObject();
+
+            message.SampleUuid = Guid.NewGuid();
+            message.Source = "UnitTest-Service";
+            message.PublishTime = DateTime.Now.ToUniversalTime();
+            message.ModifiedBy = "UnitTest-Service";
+            message.ModifiedTime = DateTime.Now.ToUniversalTime();
+            message.Method = "DELETE";
+            message.Needs = needs;
+            message.Solutions = solutions;
+            message.CompatibleServiceVersions = versions;
 
             return message;
         }

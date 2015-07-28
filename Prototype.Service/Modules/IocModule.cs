@@ -28,6 +28,7 @@ namespace Prototype.Service.Modules
             Bind<IAutoSubscriber>().To<SampleAutoSubscriber>();
             Bind<IAutoSubscriberMessageDispatcher>().To<MessageDispatcher>();
             Bind(typeof(IRepository<>)).To(typeof(MongoRepository<>));
+            Bind<IHostingEnvironment>().To<HostingEnvironment>();
 
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using EasyNetQ;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
+using Moq;
 
 namespace Prototype.Tests.Intergration
 {
@@ -11,8 +13,9 @@ namespace Prototype.Tests.Intergration
         [TestMethod]
         public void CreateMessageBusReturnsConnectedBus()
         {
-            var result = BusFactory.CreateMessageBus();
 
+            var result = BusFactory.CreateMessageBus();
+            
             Assert.IsTrue(result.IsConnected);
         }
     }

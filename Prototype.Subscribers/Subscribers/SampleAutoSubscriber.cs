@@ -14,16 +14,16 @@ namespace Prototype.Subscribers.Startables
     public class SampleAutoSubscriber : IAutoSubscriber
     {
         private readonly IBus _bus;
-
         private ILogger _logger;
-
         private IAutoSubscriberMessageDispatcher _messageDispatcher;
+        private IHostingEnvironment _environment;
 
-        public SampleAutoSubscriber(IBus bus, IAutoSubscriberMessageDispatcher messageDispatcher, ILogger logger)
+        public SampleAutoSubscriber(IBus bus, IAutoSubscriberMessageDispatcher messageDispatcher, ILogger logger, IHostingEnvironment environment)
         {
             _messageDispatcher = messageDispatcher;
             _bus = bus;
             _logger = logger;
+            _environment = environment;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Prototype.Subscribers.Startables
         public void Start()
         {
             //TODO: queue name strings to configs
-            var autoSubscriber = new AutoSubscriber(_bus, HostingEnvironment.GetEnvironmentVariable("QueueName"))
+            var autoSubscriber = new AutoSubscriber(_bus, _environment.GetEnvironmentVariable("QueueName"))
             {
                 AutoSubscriberMessageDispatcher = _messageDispatcher
             };

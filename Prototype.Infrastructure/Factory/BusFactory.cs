@@ -5,10 +5,12 @@ namespace Prototype.Infrastructure.Factory
 {
     public static class BusFactory
     {
+ 
+      
         public static IBus CreateMessageBus()
         {
-            HostingEnvironment.GetEnvironmentVariable("RabbitMQConnectionString");
-            var connectionString = HostingEnvironment.GetEnvironmentVariable("RabbitMQConnectionString");
+            var environment = new HostingEnvironment();
+            var connectionString = environment.GetEnvironmentVariable("RabbitMQConnectionString");
             return RabbitHutch.CreateBus(connectionString);
         }
     }
