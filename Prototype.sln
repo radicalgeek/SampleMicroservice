@@ -40,13 +40,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8FEA6D9-FE9A-456E-B76C-81DEC29635D9}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll = lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{33DB4C79-382E-4237-A8A6-1BBE86A863E3}"
-	ProjectSection(SolutionItems) = preProject
-		Add-Hosts.ps1 = Add-Hosts.ps1
-		Update-Hosts.ps1 = Update-Hosts.ps1
-		UpdateDockerHostEntery.bat = UpdateDockerHostEntery.bat
+		lib\Ninject.dll = lib\Ninject.dll
 	EndProjectSection
 EndProject
 Global

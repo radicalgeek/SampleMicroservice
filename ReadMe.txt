@@ -33,20 +33,23 @@ RabbitMQ/EasyNetQ - RabbitMQ is a popular message bus, EasyNetQ is a .NET wrappe
 NLog - A popular logging framework
 MongoDB gen10 - A popular NoSQL document data store. Note the use of an old version of the c# driver. 
 MongoDB.Repository - A robust generic repository pattern for MogoDB. No support yet for mongo c# driver 2.0
-Ninject - A popular Dependancy Injection framework
+Ninject - A popular Dependancy Injection framework NOTE: not using NuGet, but rather the mono build from the projects TeamCity builds (in lib folder)
 System.Web.Extensions - .NET framwork extention containing needed JSON serialisation method
 
 
-Enviroment Dependancies:
+Environment Dependancies:
 
 Docker
 RabbitMQ
 MongoDB
 
----------------------------------------------------------------------------------
-Usage:
+Development dependancies:
 
-Windows Debug - Manual.
+boot2docker
+visual studio 2013
+
+---------------------------------------------------------------------------------
+Local Dev machine setup:
 
 In order to run this service in your development environment (your PC), ensure
 you have installed boot2docker. Once you have it installed you will need to get RabbitMQ and MongoDB
@@ -87,7 +90,8 @@ $ mkdir /var/logs/rook
 $ mkdir /var/data/
 $ mkdir /var/data/rook
 
-You are now ready to fire up the RabbitMQ container and its data store
+You are now ready to fire up the RabbitMQ container and its data store. Ensure you exit the docker vm and 
+return to the boot2docker shell
 
 $ docker create --name=rook-queue-datastore -v=//var/queue:/var/lib/rabbitmq/mnesia debian:wheezy
 
@@ -104,17 +108,58 @@ And Fianly MongoDB
 
 $ docker run -d --hostname rook-sample-db -p 27017:27017 --name rook-sample-db -v //var/data/rook:/data/db  mongo --smallfiles
 
+-------------------------------------------------------------------------------------------------------------------------------
+
+Local Debug:
+
 
 Hitting debug in visual studio will then fire up the service in a console window, and connect to the database and queue you have
-in docker containers. 
+in docker containers. Logs will be output to both the console window, and to the logging directory C:\var\log\rook on your machine. 
+
+you will have a working copy of both the message queue and the database, connected just as they would in any other environment. 
+
+You can populate the database with data as you need to for your development. 
+
+You can also write intergration tests that require instances of these services to be avaliable, that are executed by calling public methods
+from test projects 
+
+Finaly, the unit testing projects are able to exercise the logic indipendently of any services
 
 --------------------------------------------------------------------------------------------
 
+Local Build:
+
+It is important that you test the application in a docker container. Doing so runs the .net executable using mono. 
+
+This gives you the opertunity to interact with the service just as it would be done in other environments. 
+To excercise the service simply place messages on the bus that the service is listening for.  
+
+First build the project in visual studio, then using the same docker shell window you used to start your environment, navigate 
+to the build output directory of the service. 
+
+Next build a docker image containing the service with the follow command
+
+$ docker build -t sampleservice .
+
+$ docker run -d --name rook-sample --link rook-sample-db:db --link rook-queue:queue --volumes-from rook-logs sampleservice
+
+You can now intergration test this solution. Note that logs will be stored in /var/log/rook on the boot2docker-vm
+
+-----------------------------------------------------------------------------------------------
+
+Remote Build:
 
 
+-----------------------------------------------------------------------------------------------
 
+Usage:
 
+To use this sample micro-service take the following steps. Lets say in this example we are creating a widgets service
 
-To run this app in a docker container
-
-$ docker run  --name rook-sample --link rook-sample-db:db --link rook-queue:queue  --volumes-from rook-logs
+1. Branch this code base giving the new branch the name widgetservice
+2. Replace all occuronces of the words "Prototype" and "Sample" with the word Widget
+3. Adjust the rules around whether to pick up a message in ____.cs
+4. Adjust the proccessing of messages in ______.cs
+5. Configure environment vars such as DB name, queue name etc.
+6. Copy the builds in jenkins from this project
+7. Deploy
