@@ -5,27 +5,22 @@ sampleService:
    - queue
   volumes_from:
    - logging
-
 logging:
   image: debian:wheezy
   volumes:
    - /var/log/rook:/var/log/rook
-
-sampleDatastore
+sampleDatastore:
   image: debian:wheezy
   volumes:
    - /var/data/rook:/data/db
-
 sampleDb:
   image: mongo
   volumes_from:
    - sampleDatastore
-
-queueDatastore
+queueDatastore:
   image: debian:wheezy
   volumes: 
    - /var/queue:/var/lib/rabbitmq/mnesia
-
 queue:
   image: rabbitmq:management
   ports:
