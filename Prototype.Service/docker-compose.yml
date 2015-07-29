@@ -1,0 +1,39 @@
+sampleService:
+  build: .
+  links:
+   - userDb:db
+   - queue
+  volumes_from:
+   - logging
+
+logging:
+  image: debian:wheezy
+  volumes:
+   - /var/log/rook:/var/log/rook
+
+sampleDatastore
+  image: debian:wheezy
+  volumes:
+   - /var/data/rook:/data/db
+
+sampleDb:
+  image: mongo
+  volumes_from:
+   - sampleDatastore
+
+queueDatastore
+  image: debian:wheezy
+  volumes: 
+   - /var/queue:/var/lib/rabbitmq/mnesia
+
+queue:
+  image: rabbitmq:management
+  ports:
+   - "8080:15672"
+   - "5672:5672"
+  volumes_from:
+   - queueDatastore
+
+
+
+
