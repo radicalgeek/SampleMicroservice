@@ -16,7 +16,7 @@ sampledatastore:
 sampledb:
   image: mongo
   volumes_from:
-   - sampleDatastore
+   - sampledatastore
 queuedatastore:
   image: debian:wheezy
   volumes: 
@@ -27,4 +27,4 @@ queue:
    - "8080:15672"
    - "5672:5672"
   volumes_from:
-   - queueDatastore
+   - queuedatastore
