@@ -1,4 +1,4 @@
-sampleService:
+sampleservice:
   build: .
   links:
    - sampleDb
@@ -9,15 +9,15 @@ logging:
   image: debian:wheezy
   volumes:
    - /var/log/rook:/var/log/rook
-sampleDatastore:
+sampledatastore:
   image: debian:wheezy
   volumes:
    - /var/data/rook:/data/db
-sampleDb:
+sampledb:
   image: mongo
   volumes_from:
    - sampleDatastore
-queueDatastore:
+queuedatastore:
   image: debian:wheezy
   volumes: 
    - /var/queue:/var/lib/rabbitmq/mnesia
