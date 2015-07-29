@@ -33,7 +33,3 @@ queue:
    - "5672:5672"
   volumes_from:
    - queueDatastore
-
-
-
-
