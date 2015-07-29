@@ -1,7 +1,7 @@
 sampleservice:
   build: .
   links:
-   - sampleDb
+   - sampledb
    - queue
   volumes_from:
    - logging
