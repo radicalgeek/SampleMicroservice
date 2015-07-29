@@ -23,12 +23,19 @@ namespace Prototype.Infrastructure
         /// Publishs a messaage to the bus, with no delivery verification, response or callback
         /// </summary>
         /// <param name="message">The message to be published</param>
-        public void Publish(dynamic message)
+        public void Publish(dynamic message, string topic)
         {
             try
             {
                 _logger.Info("Publishing Message: {0}", message);
-                _bus.Publish(message);
+                if (!string.IsNullOrEmpty(topic))
+                {
+                    _bus.Publish(message,topic);
+                }
+                else
+                {
+                    _bus.Publish(message);
+                }
                 _logger.Info("Publish Message succeded");
             }
             catch (EasyNetQException ex)

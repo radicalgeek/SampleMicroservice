@@ -24,6 +24,7 @@ namespace Prototype.Tests.Intergration
     public class QueueOpperationTests
     {
         [Test]
+        [Ignore]
         public void ServicePublishesMessages()
         {
             
@@ -47,20 +48,44 @@ namespace Prototype.Tests.Intergration
                 NewStringValue = "test"
             };
             newEntities.Add(entity);
-            var recivedMessages = new List<JObject>();
+            var recivedMessages = new List<SampleMessage>();
 
             dynamic message = new ExpandoObject();
             message.Message = messageData;
 
+            var queue = bus.Subscribe<SampleMessage>("test_id", msg => recivedMessages.Add(msg));
+            
 
-            logicClass.PublishSuccessMessage(message, newEntities);
+            bus.Publish(new SampleMessage
+                        {
+                            Message = "this is a test"
+                        });
 
-            bus.Subscribe<JObject>("my_subscription_id", msg => recivedMessages.Add(msg));
+            //logicClass.PublishSuccessMessage(new SampleMessage
+            //            {
+            //                Message = "this is a test"
+            //            }, 
+            //            newEntities,
+            //            "");
+
+            System.Threading.Thread.Sleep(10000);
 
             //var serializer = new JavaScriptSerializer();
             //serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
             //dynamic dynamicMessageObject = serializer.Deserialize(recivedMessages[0], typeof(object));
 
+        }
+
+        public class TestMessage
+        {
+            Guid SampleUuid { get; set; }
+            string Source { get; set; }
+            DateTime PublishTime { get; set; }
+            string ModifiedBy { get; set; }
+            DateTime ModifiedTime { get; set; }
+            string Method { get; set; }
+            Dictionary<string,string> Needs { get; set; }
+            Dictionary<string,string> Solutions { get; set; }
         }
     }
 }

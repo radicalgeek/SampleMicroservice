@@ -22,9 +22,9 @@ namespace Prototype.Tests.Unit
             var logger = new Mock<ILogger>();
             var messagePublisher = new MessagePublisher(bus.Object, logger.Object);
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "test");
 
-            bus.Verify(o => o.Publish(It.IsAny<Object>()),Times.Once());
+            bus.Verify(o => o.Publish(It.IsAny<Object>(),It.IsAny<string>()),Times.Once());
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace Prototype.Tests.Unit
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>(),It.IsAny<Object[]>()))
                 .Callback<string, Object[]>((message, obj) => invocations.Add(message));
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "test");
 
             Assert.IsTrue(invocations[0].Contains("Publishing Message: "));
         }
@@ -52,7 +52,7 @@ namespace Prototype.Tests.Unit
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>()))
                 .Callback<string, Object[]>((message, obj) => invocations.Add(message));
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "test");
 
             Assert.IsTrue(invocations[0].Contains("Publish Message succeded"));
         }
@@ -66,10 +66,10 @@ namespace Prototype.Tests.Unit
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Error(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
-            bus.Setup(busObj => busObj.Publish(It.IsAny<object>()))
+            bus.Setup(busObj => busObj.Publish(It.IsAny<object>(),It.IsAny<string>()))
                 .Throws(new EasyNetQException("Test error"));
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage());
+            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "test");
 
             Assert.IsTrue(invocations[0].Contains("Publish Message Failed: "));
         }

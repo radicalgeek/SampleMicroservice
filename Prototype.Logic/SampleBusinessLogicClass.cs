@@ -131,7 +131,7 @@ namespace Prototype.Logic
                 }
                 if (entities.Count > 0)
                 {
-                    PublishSuccessMessage(message, entities);
+                    PublishSuccessMessage(message, entities, "test");
                 }
                 else
                 {
@@ -154,7 +154,7 @@ namespace Prototype.Logic
             {
                 _sampleEntityRepository.Update(entity);
                 _logger.Info("SampleEntities updated for message {0}", message.SampleUuid);
-                PublishSuccessMessage(message, entity);
+                PublishSuccessMessage(message, entity, "test");
             }
             catch (Exception ex)
             {
@@ -178,7 +178,7 @@ namespace Prototype.Logic
                     _logger.Info("New SampleEntity {0} created", entity.Id);
                     
                 }
-                PublishSuccessMessage(message, entities);
+                PublishSuccessMessage(message, entities, "test");
             }
             catch (Exception ex)
             {
@@ -187,7 +187,7 @@ namespace Prototype.Logic
             }
         }
 
-        public void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities )
+        public void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities, string topic )
         {
             orignalMessage.ModifiedTime = DateTime.Now.ToUniversalTime();
             orignalMessage.ModifiedBy = _environment.GetServiceName();
@@ -206,7 +206,7 @@ namespace Prototype.Logic
             }
             orignalMessage.Solutions = solutions;
 
-            _publisher.Publish(orignalMessage);
+            _publisher.Publish(orignalMessage, topic);
 
         }
 

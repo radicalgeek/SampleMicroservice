@@ -139,7 +139,7 @@ namespace Prototype.Tests.Unit
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => loggerInvocations.Add(message));
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<object>(msg => messageInvocations.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<object, string>((msg, str) => messageInvocations.Add(msg));
 
             logicClass.RouteSampleMessage(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
@@ -159,7 +159,7 @@ namespace Prototype.Tests.Unit
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => loggerInvocations.Add(message));
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<object>(msg => messageInvocations.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<object, string>((msg, str) => messageInvocations.Add(msg));
 
             logicClass.RouteSampleMessage(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
@@ -179,7 +179,7 @@ namespace Prototype.Tests.Unit
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => loggerInvocations.Add(message));
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<object>(msg => messageInvocations.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<object, string>((msg, str) => messageInvocations.Add(msg));
             var requestMessage = TestMessages.GetTestCreateSampleEntityMessageWithMultiple();
             logicClass.RouteSampleMessage(requestMessage);
 
@@ -200,11 +200,11 @@ namespace Prototype.Tests.Unit
             logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception, string, object[]>((ex, message, obj) => invocations.Add(message));
             repo.Setup(r => r.Add(It.IsAny<IEnumerable<SampleEntity>>())).Throws(new Exception("Test exception"));
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<object>(msg => messageInvocations.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<object, string>((msg, str) => messageInvocations.Add(msg));
 
             logicClass.RouteSampleMessage(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(messageInvocations[0].Solutions == ""); //what the hell should we check for));
+            Assert.IsTrue(invocations[0].Contains("Test Error")); //what the hell should we check for));
 
 
         }
@@ -226,7 +226,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntities(message);
 
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
 
             repo.Entities = entitys;
             logicClass.RouteSampleMessage(message);
@@ -249,8 +249,8 @@ namespace Prototype.Tests.Unit
             var logList = new List<string>();
             var responseList = new List<dynamic>();
 
-            publisher.Setup(p => p.Publish(It.IsAny<object>()))
-                .Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>()))
+                .Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logList.Add(msg));
 
@@ -274,8 +274,8 @@ namespace Prototype.Tests.Unit
             var logList = new List<string>();
             var responseList = new List<dynamic>();
 
-            publisher.Setup(p => p.Publish(It.IsAny<object>()))
-                .Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>()))
+                .Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logList.Add(msg));
 
@@ -299,8 +299,8 @@ namespace Prototype.Tests.Unit
             var logList = new List<string>();
             var responseList = new List<dynamic>();
 
-            publisher.Setup(p => p.Publish(It.IsAny<object>()))
-                .Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>()))
+                .Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Error(It.IsAny<Exception>(),It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception, string, object[]>((ex, msg, obj) => logList.Add(msg));
             repo.Setup(r => r.GetById(It.IsAny<string>())).Throws(new Exception("test exception"));
@@ -329,7 +329,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
 
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic,string>((msg,str) => responseList.Add(msg));
 
             message.Needs[0].NewStringValue = "Updated Test";
             message.Needs[0].NewIntValue = 456;
@@ -354,7 +354,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
@@ -382,7 +382,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
@@ -410,7 +410,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
@@ -438,7 +438,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception,string, object[]>((ex,msg, obj) => logResponse.Add(msg));
             repo.Setup(r => r.Update(It.IsAny<List<SampleEntity>>())).Throws(new Exception("test exception"));
@@ -472,7 +472,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntities(message);
             
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             
 
             repo.Entities = entitys;
@@ -496,7 +496,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntities(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
@@ -521,7 +521,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntities(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
 
@@ -546,7 +546,7 @@ namespace Prototype.Tests.Unit
             var entitys = TestEntities.SetUpSampleEntities(message);
             var logResponse = new List<string>();
             var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>())).Callback<dynamic>(msg => responseList.Add(msg));
+            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
             logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception, string, object[]>((ex, msg, obj) => logResponse.Add(msg));
             repo.Setup(r => r.Delete(It.IsAny<string>())).Throws(new Exception("test exception"));

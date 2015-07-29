@@ -4,7 +4,7 @@ namespace Prototype.Infrastructure
 {
     public interface IMessagePublisher
     {
-        void Publish(dynamic message);
+        void Publish(dynamic message, string topic);
 
     }
 }
