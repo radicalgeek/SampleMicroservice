@@ -26,8 +26,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Logic", "Prototyp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{020367D3-99AB-4D67-AD02-B702C0E6679E}"
 	ProjectSection(SolutionItems) = preProject
-		build.sh = build.sh
+		debugbuild.sh = debugbuild.sh
 		ReadMe.txt = ReadMe.txt
+		releasebuild.sh = releasebuild.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Unit", "Prototype.Tests.Unit\Prototype.Tests.Unit.csproj", "{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}"
