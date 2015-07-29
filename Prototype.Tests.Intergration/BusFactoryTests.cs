@@ -1,21 +1,19 @@
 ﻿using System;
 using EasyNetQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
 using Moq;
 
 namespace Prototype.Tests.Intergration
 {
-    [TestClass]
+    [TestFixture]
     public class BusFactoryTests
     {
-        [TestMethod]
+        [Test]
         public void CreateMessageBusReturnsConnectedBus()
         {
-
-            var result = BusFactory.CreateMessageBus();
-            
+            var result = BusFactory.CreateMessageBus();        
             Assert.IsTrue(result.IsConnected);
         }
     }

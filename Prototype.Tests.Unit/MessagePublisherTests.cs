@@ -3,18 +3,19 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Collections.Generic;
 using EasyNetQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Logger;
+using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
 {
 
-    [TestClass]
+    [TestFixture]
     public class MessagePublisherTests
     {
-        [TestMethod]
+        [Test]
         public void PublishAddsMessageToBus()
         {
             var bus = new Mock<IBus>();
@@ -26,7 +27,7 @@ namespace Prototype.Tests.Unit
             bus.Verify(o => o.Publish(It.IsAny<Object>()),Times.Once());
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageBeingPublished()
         {
             var bus = new Mock<IBus>();
@@ -41,7 +42,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[0].Contains("Publishing Message: "));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageIsPublished()
         {
             var bus = new Mock<IBus>();
@@ -56,7 +57,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[0].Contains("Publish Message succeded"));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishFailiureLogsErrorMessage()
         {
             var bus = new Mock<IBus>();

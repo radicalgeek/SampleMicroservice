@@ -4,28 +4,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using EasyNetQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoRepository;
 using Moq;
+using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Logger;
 using Prototype.Logic;
 using Prototype.Logic.DataEntities;
+using NUnit;
+using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
 {
     /// <summary>
     /// Summary description for SampleBusinessLogicTests
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class SampleBusinessLogicTests
     {
 
         #region Create
 
-        [TestMethod]
+        [Test]
         public void PostOperationCreatesSingleDataEntity()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -39,7 +41,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(repo.Entities.Count.Equals(1));
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationCreatesMultipleDataEntities()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -53,7 +55,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(repo.Entities.Count.Equals(2));
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationLogsStoringOfEntities()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -70,7 +72,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[0].Contains("Storing new SampleEntities from message"));
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationLogsSuccessfullStoreOfEntities()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -87,7 +89,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[1].Contains("New SampleEntity"));
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationWith2SolutionsLogsSuccessfullStoreOfEntitieTwice()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -106,7 +108,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations.Count == 3);
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationLogsErrorIfUnableToStore()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -125,7 +127,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationRaisesNewEvent()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -145,7 +147,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationRaisesEventWithSolutions()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -165,7 +167,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationRaisesEventWithCorrectSampleUuid()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -185,7 +187,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PostOperationRaisesFailEventIfUnableToStore()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -211,7 +213,7 @@ namespace Prototype.Tests.Unit
 
         #region Read
 
-        [TestMethod]
+        [Test]
         public void GetOperationRetrivesSingleEntityByPrimaryKey()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -233,7 +235,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void GetOperationLogsThatItIsLookingForEntity()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -258,7 +260,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(logList[0].Contains("Locating SampleEntities for message:"));
         }
 
-        [TestMethod]
+        [Test]
         public void GetOperationLogsEntityFound()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -283,7 +285,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(logList[1].Contains("located"));
         }
 
-        [TestMethod]
+        [Test]
         public void GetOperationLogsEntityNotFound()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -313,7 +315,7 @@ namespace Prototype.Tests.Unit
 
         #region Update
 
-        [TestMethod]
+        [Test]
         public void PutOperationUpdatesEntity()
         {
 
@@ -339,7 +341,7 @@ namespace Prototype.Tests.Unit
         
         }
 
-        [TestMethod]
+        [Test]
         public void PutOperationLogsEntityUpdating()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -367,7 +369,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PutOperationLogsEntityUpdated()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -395,7 +397,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PutOperationReturnsUpdatedEntity()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -423,7 +425,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void PutOperationLogsUpdateFailed()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -456,7 +458,7 @@ namespace Prototype.Tests.Unit
 
         #region Delete
 
-        [TestMethod]
+        [Test]
         public void DeleteOperationRemovesEntity()
         {
 
@@ -480,7 +482,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteOperationLogsEntityToBeRemoved()
         {
 
@@ -505,7 +507,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteOperationLogsEntityIsRemoved()
         {
 
@@ -530,7 +532,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteOperationLogsUnableToRemoveEntity()
         {
 
@@ -560,7 +562,7 @@ namespace Prototype.Tests.Unit
 
         #region ShouldProcessTests
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsTrueWhenMessageLastModifiedByAnotherService()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -577,7 +579,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsFalseWhenMessageLastModifiedByThisService()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -595,7 +597,7 @@ namespace Prototype.Tests.Unit
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsTrueWhenRequiredVersionNotSet()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -610,7 +612,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsTrueWhenRequiredVersionLowerThanServiceVersion()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -629,7 +631,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsFalseWhenRequiredVersionHigherThanServiceVersion()
         {
             var publisher = new Mock<IMessagePublisher>();
@@ -648,7 +650,7 @@ namespace Prototype.Tests.Unit
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldProceesReturnsTrueWhenRequiredVersionSameAsServiceVersion()
         {
             var publisher = new Mock<IMessagePublisher>();

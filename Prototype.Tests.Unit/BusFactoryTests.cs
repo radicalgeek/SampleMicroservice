@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Configuration;
 using EasyNetQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
 
 namespace Prototype.Tests.Unit
 {
-    [TestClass]
+    [TestFixture]
     public class BusFactoryTests
     {
-        [TestMethod]
+        [Test]
         public void CreateMessageBusReturnsIBus()
         {
             var result = BusFactory.CreateMessageBus();
 
-            Assert.IsInstanceOfType(result, typeof (IBus));
+            Assert.IsInstanceOfType(typeof(IBus), result);
         }
 
     }

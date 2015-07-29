@@ -3,21 +3,22 @@ using System.Text;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using EasyNetQ.AutoSubscribe;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Prototype.Logger;
 using Prototype.MessageTypes.Messages;
 using Prototype.Subscribers.Dispatcher;
+using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
 {
     /// <summary>
     /// Summary description for MessageDispatcherTests
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class MessageDispatcherTests
     {
-        [TestMethod]
+        [Test]
         public void MessageIsDispatchedToCunsumer()
         {
             var logger = new Mock<ILogger>();
@@ -36,7 +37,7 @@ namespace Prototype.Tests.Unit
         }
 
 
-        [TestMethod]
+        [Test]
         public void MessageDispatchFaliureLogsError()
         {
             var logger = new Mock<ILogger>();

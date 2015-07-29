@@ -2,24 +2,25 @@
 using System.Text;
 using System.Collections.Generic;
 using EasyNetQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Prototype.Logger;
 using Prototype.Logic;
 using Prototype.MessageTypes.Messages;
 using Prototype.Subscribers.Consumers;
 using System.Web.Script.Serialization;
+using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
 {
     /// <summary>
     /// Summary description for MessageConsumerTests
     /// </summary>
-    [TestClass]
+    [TestFixture]
     public class MessageConsumerTests
     {
 
-        [TestMethod]
+        [Test]
         public void ConsumeSendsMessageToLogicLayer()
         {
             var logger = new Mock<ILogger>();
@@ -33,7 +34,7 @@ namespace Prototype.Tests.Unit
             logicLayer.Verify(v => v.RouteSampleMessage(It.IsAny<object>()));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageRecived()
         {
             var logger = new Mock<ILogger>();
@@ -49,7 +50,7 @@ namespace Prototype.Tests.Unit
            Assert.IsTrue(invocations[0].Contains("Message recieved"));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageProccessingBegun()
         {
             var logger = new Mock<ILogger>();
@@ -65,7 +66,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[1].Contains("begun"));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageProccessingSucceded()
         {
             var logger = new Mock<ILogger>();
@@ -81,7 +82,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[2].Contains("Succeded"));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsMessageProccessingFailed()
         {
             var logger = new Mock<ILogger>();
@@ -98,7 +99,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(invocations[0].Contains("failed"));
         }
 
-        [TestMethod]
+        [Test]
         public void PublishLogsExecutionTime()
         {
             var logger = new Mock<ILogger>();

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prototype.Logic.DataEntities;
 
-namespace Prototype.Tests.Unit
+namespace Prototype.Tests.Helpers
 {
     public static class TestEntities
     {

@@ -58,9 +58,15 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\EasyNetQ.0.50.1.392\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoRepository.Net45">
+      <HintPath>..\packages\MongoRepository.1.6.8\lib\net45\MongoRepository.Net45.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.dll</HintPath>
@@ -68,10 +74,18 @@
     <Reference Include="Moq.Contrib">
       <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.Contrib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\RabbitMQ.Client.3.5.3\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -84,15 +98,37 @@
   <ItemGroup>
     <Compile Include="BusFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueOpperationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
       <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
       <Name>Prototype.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
+      <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
+      <Name>Prototype.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Logic\Prototype.Logic.csproj">
+      <Project>{bef278ac-b7ce-4d62-a2e7-6aba32e1b43f}</Project>
+      <Name>Prototype.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.MessageTypes\Prototype.MessageTypes.csproj">
+      <Project>{5bb2a478-21c4-42f8-9e55-656f4baca9bb}</Project>
+      <Name>Prototype.MessageTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Subscribers\Prototype.Subscribers.csproj">
+      <Project>{339ee9f2-12f5-4e67-87bd-fc0af286d1f2}</Project>
+      <Name>Prototype.Subscribers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prototype.Tests.Helpers\Prototype.Tests.Helpers.csproj">
+      <Project>{aa6310e1-91cf-4392-a4e7-f41493005a55}</Project>
+      <Name>Prototype.Tests.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="MongoRepository.chm" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

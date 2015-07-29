@@ -187,7 +187,7 @@ namespace Prototype.Logic
             }
         }
 
-        private void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities )
+        public void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities )
         {
             orignalMessage.ModifiedTime = DateTime.Now.ToUniversalTime();
             orignalMessage.ModifiedBy = _environment.GetServiceName();
