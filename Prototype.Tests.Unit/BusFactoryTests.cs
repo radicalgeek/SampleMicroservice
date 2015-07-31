@@ -12,11 +12,11 @@ namespace Prototype.Tests.Unit
     public class BusFactoryTests
     {
         [Test]
-        public void CreateMessageBusReturnsIBus()
+        public void CreateMessageBusReturnsIAdvancedBus()
         {
             var result = BusFactory.CreateMessageBus();
 
-            Assert.IsInstanceOfType(typeof(IBus), result);
+            Assert.IsInstanceOfType(typeof(IAdvancedBus), result);
         }
 
     }

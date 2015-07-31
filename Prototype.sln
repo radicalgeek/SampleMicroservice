@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		debugbuild.sh = debugbuild.sh
 		ReadMe.txt = ReadMe.txt
 		releasebuild.sh = releasebuild.sh
+		setuplocaldev.sh = setuplocaldev.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Unit", "Prototype.Tests.Unit\Prototype.Tests.Unit.csproj", "{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}"
@@ -41,7 +42,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Intergratio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8FEA6D9-FE9A-456E-B76C-81DEC29635D9}"
 	ProjectSection(SolutionItems) = preProject
-		lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll = lib\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 		lib\Ninject.dll = lib\Ninject.dll
 	EndProjectSection
 EndProject

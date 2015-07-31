@@ -13,7 +13,7 @@ namespace Prototype.TestHarness
         public override void Load()
         {
             Bind<IServiceTester>().To<ServiceTester>();
-            Bind<IBus>().ToMethod(context => BusFactory.CreateMessageBus()).InSingletonScope();
+            Bind<IAdvancedBus>().ToMethod(context => BusFactory.CreateMessageBus()).InSingletonScope();
             Bind<ILogger>().To<Logger.Logger>().InSingletonScope();
      
             

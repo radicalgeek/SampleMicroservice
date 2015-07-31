@@ -1,11 +1,15 @@
 ﻿using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using EasyNetQ.Topology;
 using MongoRepository;
+using Ninject;
 using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factory;
 using Prototype.Logger;
+using Prototype.Logic;
 using Prototype.Logic.DataEntities;
+using Prototype.Subscribers.Consumers;
 using Prototype.Subscribers.Dispatcher;
 using Prototype.Subscribers.Startables;
 
@@ -22,14 +26,17 @@ namespace Prototype.Service.Modules
         public override void Load()
         {
             Bind<ISampleService>().To<SampleService>();
-            Bind<IBus>().ToMethod(context => BusFactory.CreateMessageBus()).InSingletonScope();
+            Bind<IAdvancedBus>().ToMethod(context => BusFactory.CreateMessageBus()).InSingletonScope();
+            Bind<IExchange>().ToMethod(context => ExchangeFactory.CreatExchange(context.Kernel.Get<IAdvancedBus>())).InSingletonScope();
+            Bind<IQueue>().ToMethod(context => QueueFactory.CreatQueue(context.Kernel.Get<IAdvancedBus>())).InSingletonScope();
             Bind<ILogger>().To<Logger.Logger>().InSingletonScope();
             Bind<IMessagePublisher>().To<MessagePublisher>();
-            Bind<IAutoSubscriber>().To<SampleAutoSubscriber>();
+            Bind<IMessageConsumer>().To<MessageConsumer>();
+            Bind<ISubscriber>().To<SampleSubscriber>();
             Bind<IAutoSubscriberMessageDispatcher>().To<MessageDispatcher>();
-            Bind(typeof(IRepository<>)).To(typeof(MongoRepository<>));
+            Bind(typeof(IRepository<SampleEntity,string>)).To(typeof(MongoRepository<SampleEntity,string>));
             Bind<IHostingEnvironment>().To<HostingEnvironment>();
-
+            Bind<ISampleLogic>().To<SampleBusinessLogicClass>();
         }
     }
 }

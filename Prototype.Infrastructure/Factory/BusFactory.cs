@@ -7,11 +7,11 @@ namespace Prototype.Infrastructure.Factory
     {
  
       
-        public static IBus CreateMessageBus()
+        public static IAdvancedBus CreateMessageBus()
         {
             var environment = new HostingEnvironment();
             var connectionString = environment.GetEnvironmentVariable("RabbitMQConnectionString");
-            return RabbitHutch.CreateBus(connectionString);
+            return RabbitHutch.CreateBus(connectionString).Advanced;
         }
     }
 }

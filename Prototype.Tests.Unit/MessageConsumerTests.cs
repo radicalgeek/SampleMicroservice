@@ -26,10 +26,10 @@ namespace Prototype.Tests.Unit
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
 
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
 
-            consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+            consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
             logicLayer.Verify(v => v.RouteSampleMessage(It.IsAny<object>()));
         }
@@ -39,13 +39,13 @@ namespace Prototype.Tests.Unit
         {
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
 
-           consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+           consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
            Assert.IsTrue(invocations[0].Contains("Message recieved"));
         }
@@ -55,13 +55,13 @@ namespace Prototype.Tests.Unit
         {
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
 
-            consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+            consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
             Assert.IsTrue(invocations[1].Contains("begun"));
         }
@@ -71,13 +71,13 @@ namespace Prototype.Tests.Unit
         {
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
 
-            consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+            consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
             Assert.IsTrue(invocations[2].Contains("Succeded"));
         }
@@ -87,14 +87,14 @@ namespace Prototype.Tests.Unit
         {
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Error(It.IsAny<Exception>(),It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception,string, object[]>((ex, message, obj) => invocations.Add(message));
             logicLayer.Setup(c => c.RouteSampleMessage(It.IsAny<object>())).Throws(new Exception("test exception"));
 
-            consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+            consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
             Assert.IsTrue(invocations[0].Contains("failed"));
         }
@@ -104,14 +104,14 @@ namespace Prototype.Tests.Unit
         {
             var logger = new Mock<ILogger>();
             var logicLayer = new Mock<ISampleLogic>();
-            var consumer = new SampleMessageConsumer(logger.Object, logicLayer.Object);
+            var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
             logger.Setup(loggerObj => loggerObj.Trace(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<TimeSpan>()))
                 .Callback<string, object[]>((text, message) => invocations.Add(text));
 
 
-            consumer.Consume(new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) });
+            consumer.Consume(new Message<SampleMessage>( new SampleMessage { Message = serializer.Serialize(TestMessages.GetTestNeedUserMessage()) }));
 
             Assert.IsTrue(invocations[0].Contains("proccessed in"));
         }

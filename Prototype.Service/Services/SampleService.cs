@@ -13,12 +13,12 @@ namespace Prototype.Service
     public class SampleService : ServiceControl, ISampleService
     {
         private readonly ILogger _logger;
-        private IAutoSubscriber _sampleAutoSubscriber;
+        private ISubscriber _sampleSubscriber;
 
-        public SampleService(ILogger logger, IAutoSubscriber sampleAutoSubscriber)
+        public SampleService(ILogger logger, ISubscriber sampleSubscriber)
         {
             _logger = logger;
-            _sampleAutoSubscriber = sampleAutoSubscriber;
+            _sampleSubscriber = sampleSubscriber;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Prototype.Service
         /// <returns>always returns true</returns>
         public bool Start(HostControl hostControl)
         {
-            _sampleAutoSubscriber.Start();
+            _sampleSubscriber.Start();
 
             _logger.Info("Prototype .NET Micro Service Started");
             return true;
@@ -41,7 +41,7 @@ namespace Prototype.Service
         /// <returns>always returns true</returns>
         public bool Stop(HostControl hostControl)
         {
-            _sampleAutoSubscriber.Stop();
+            _sampleSubscriber.Stop();
             _logger.Info("Prototype .NET Micro Service Stopped");
             return true;
         }

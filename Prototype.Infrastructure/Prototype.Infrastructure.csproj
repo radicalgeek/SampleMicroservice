@@ -78,6 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\ExchangeFactory.cs" />
+    <Compile Include="Factory\QueueFactory.cs" />
     <Compile Include="HostingEnvironment.cs" />
     <Compile Include="IHostingEnvironment.cs" />
     <Compile Include="IMessagePublisher.cs" />

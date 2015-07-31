@@ -24,15 +24,18 @@ namespace Prototype.Tests.Intergration
     public class QueueOpperationTests
     {
         [Test]
-        [Ignore]
         public void ServicePublishesMessages()
         {
-            
+
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IHostingEnvironment>();
-            var bus = BusFactory.CreateMessageBus(); 
-            var publisher = new MessagePublisher(bus,logger.Object);
+            var bus = BusFactory.CreateMessageBus();
+            var queue = QueueFactory.CreatQueue(bus);
+            var exchange = ExchangeFactory.CreatExchange(bus);
+            bus.Bind(exchange, queue, "A.*");
+            var publisher = new MessagePublisher(bus, logger.Object, exchange,queue);
+
             var logicClass = new SampleBusinessLogicClass(logger.Object, publisher, repo.Object, env.Object);
             var messageData = TestMessages.GetTestCreateSampleEntityMessage();
 
@@ -48,32 +51,28 @@ namespace Prototype.Tests.Intergration
                 NewStringValue = "test"
             };
             newEntities.Add(entity);
-            var recivedMessages = new List<SampleMessage>();
-
-            dynamic message = new ExpandoObject();
-            message.Message = messageData;
-
-            var queue = bus.Subscribe<SampleMessage>("test_id", msg => recivedMessages.Add(msg));
+            var recivedMessages = new List<dynamic>();
             
+            //var subscription = bus.Subscribe<dynamic>("test_id", msg => recivedMessages.Add(msg));
+            //bus.Consume(queue, dispatcher => dispatcher.Add<SampleMessage>((message, info) =>
+            //{
+            //    recivedMessages.Add(message);
+            //}));
 
-            bus.Publish(new SampleMessage
-                        {
-                            Message = "this is a test"
-                        });
+            var consumer = bus.Consume<dynamic>(queue, (message, info) =>  
+                 Task.Factory.StartNew(() =>  
+                     recivedMessages.Add(message)
+                     )
+                 );
 
-            //logicClass.PublishSuccessMessage(new SampleMessage
-            //            {
-            //                Message = "this is a test"
-            //            }, 
-            //            newEntities,
-            //            "");
+            System.Threading.Thread.Sleep(5000);
 
-            System.Threading.Thread.Sleep(10000);
+            logicClass.PublishSuccessMessage(messageData, newEntities, "A.B");
+            System.Threading.Thread.Sleep(5000);
 
-            //var serializer = new JavaScriptSerializer();
-            //serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-            //dynamic dynamicMessageObject = serializer.Deserialize(recivedMessages[0], typeof(object));
-
+            consumer.Dispose();
+            Assert.IsTrue(recivedMessages.Count >= 1);
+            
         }
 
         public class TestMessage

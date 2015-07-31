@@ -1,6 +1,6 @@
 ﻿namespace Prototype.Subscribers.Startables
 {
-    public interface IAutoSubscriber
+    public interface ISubscriber
     {
         void Start();
         void Stop();
