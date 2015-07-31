@@ -14,7 +14,6 @@ using Prototype.Logger;
 using Prototype.Logic;
 using Prototype.Logic.DataEntities;
 using Prototype.MessageTypes.Messages;
-using Prototype.Subscribers.Serializers;
 using Prototype.Tests.Unit;
 using System.Web.Script.Serialization;
 
@@ -59,13 +58,13 @@ namespace Prototype.Tests.Intergration
             //    recivedMessages.Add(message);
             //}));
 
-            var consumer = bus.Consume<dynamic>(queue, (message, info) =>  
+            var consumer = bus.Consume<object>(queue, (message, info) =>  
                  Task.Factory.StartNew(() =>  
-                     recivedMessages.Add(message)
+                      recivedMessages.Add(message)
                      )
                  );
 
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
 
             logicClass.PublishSuccessMessage(messageData, newEntities, "A.B");
             System.Threading.Thread.Sleep(5000);

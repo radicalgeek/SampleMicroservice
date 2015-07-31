@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Web.Script.Serialization;
+using Prototype.Infrastructure.Serializers;
 using EasyNetQ;
+using Prototype.Infrastructure.Serializers;
 using Prototype.Logger;
 using EasyNetQ.AutoSubscribe;
 using Newtonsoft.Json;
 using Prototype.Logic;
 using Prototype.MessageTypes.Messages;
-using Prototype.Subscribers.Serializers;
 
 namespace Prototype.Subscribers.Consumers
 {

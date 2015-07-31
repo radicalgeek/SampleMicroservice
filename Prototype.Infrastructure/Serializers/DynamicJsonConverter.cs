@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
 
-namespace Prototype.Subscribers.Serializers
+namespace Prototype.Infrastructure.Serializers
 {
     /// <summary>
     /// pinched this, can't comment on it, but it seems to work! needs more tests I guess
