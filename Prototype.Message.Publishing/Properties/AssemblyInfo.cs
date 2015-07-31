@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Prototype.Logic")]
-[assembly: AssemblyDescription("Buisiness logic for the prototype service")]
+[assembly: AssemblyTitle("Prototype.Message.Publishing")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Experian ECS")]
-[assembly: AssemblyProduct("Prototype.Logic")]
-[assembly: AssemblyCopyright("Copyright © Experian 2015")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Prototype.Message.Publishing")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3a6a9908-3d7a-4140-81e4-754c0a5e5e46")]
+[assembly: Guid("18f4b84c-060e-4ce4-9d5f-2512ab4f431b")]
 
 // Version information for an assembly consists of the following four values:
 //

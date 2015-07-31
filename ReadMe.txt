@@ -5,10 +5,12 @@ This prototype achives the following micro-service design principles
 
 1). In built metrics and logging
 	- It is intended that micro-services will output logs to text files that will then be parsed by Splunk
+	- Textual content should be in Key="value" format. 
+	- Performance metrics should also be logged 
 2). Loosly couple contracts
-	- Both publishing and subscribing contracts use the C# 4 dynamic type object. This means that if the contract has new
-	  properties added to it, the service will ignore then new vproperties and continue to work. It also mean that there
-	  is no compile time checking, as these objects are not evaluated untill run-time.
+	- Both publishing and subscribing contracts use the C# 4 dynamic types and JSON objects. This means that if the contract has new
+	  properties added to it, the service will ignore then new properties and continue to work. It also mean that there
+	  is no compile time checking, as these objects are not evaluated untill run-time. Unit testing becomes all the more important
 3). Lightweight platform agnostic hosting. 
 	- Using Topshelf and keeping .NET framework libraries to a minimum means this service can be hosted with 
 	  Mono on Unix and Linux machines (as well as windows). This further means that lighweight virtualisation technologies such as
@@ -34,7 +36,7 @@ NLog - A popular logging framework
 MongoDB gen10 - A popular NoSQL document data store. Note the use of an old version of the c# driver. 
 MongoDB.Repository - A robust generic repository pattern for MogoDB. No support yet for mongo c# driver 2.0
 Ninject - A popular Dependancy Injection framework NOTE: not using NuGet, but rather the mono build from the projects TeamCity builds (in lib folder)
-System.Web.Extensions - .NET framwork extention containing needed JSON serialisation method
+Netwonsoft.Json - .NET JSON serialisation framework
 
 
 Environment Dependancies:
@@ -107,6 +109,10 @@ $ docker run --name rook-logs -v //var/log/rook:/var/log/rook debian:wheezy
 And Fianly MongoDB
 
 $ docker run -d --hostname rook-sample-db -p 27017:27017 --name rook-sample-db -v //var/data/rook:/data/db  mongo --smallfiles
+
+
++++++++++++++++
+you can also just run the setuplocaldev.sh file in the boot2docker shell to run all of the above commands.
 
 -------------------------------------------------------------------------------------------------------------------------------
 

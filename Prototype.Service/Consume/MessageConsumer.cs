@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using EasyNetQ;
-using Prototype.Logger;
 using Newtonsoft.Json;
-using Prototype.Logic;
-using Prototype.MessageTypes.Messages;
+using Prototype.Logger;
+using Prototype.Service.Messages;
+using Prototype.Service.Routing;
 
-namespace Prototype.Subscribers.Consumers
+namespace Prototype.Service.Consume
 {
     /// <summary>
     /// This is a sample consumer of Test Messages. The autosubscriber automaticly registers any class that impliments
@@ -16,13 +16,13 @@ namespace Prototype.Subscribers.Consumers
     /// </summary>
     public class MessageConsumer : IMessageConsumer
     {
-        private ILogger _logger;
-        private ISampleLogic _sampleLogic;
+        private readonly ILogger _logger;
+        private readonly IServiceLogic _serviceLogic;
 
-        public MessageConsumer(ILogger logger, ISampleLogic sampleLogicLayer)
+        public MessageConsumer(ILogger logger, IServiceLogic serviceLogicLayer)
         {
             _logger = logger;
-            _sampleLogic = sampleLogicLayer;
+            _serviceLogic = serviceLogicLayer;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Prototype.Subscribers.Consumers
             try
             {
                 _logger.Info("Proccessing message {0} begun", message.Properties.CorrelationId);
-                _sampleLogic.RouteSampleMessage(dynamicMessageObject);
+                _serviceLogic.RouteSampleMessage(dynamicMessageObject);
                 _logger.Info("Proccessing message {0} Succeded", message.Properties.CorrelationId);
             }
             catch (Exception ex)

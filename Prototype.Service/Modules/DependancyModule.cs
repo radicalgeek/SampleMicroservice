@@ -1,23 +1,25 @@
 ﻿using EasyNetQ;
-using EasyNetQ.AutoSubscribe;
 using EasyNetQ.Topology;
 using MongoRepository;
 using Ninject;
 using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factories;
+using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
-using Prototype.Logic;
-using Prototype.Logic.DataEntities;
-using Prototype.Subscribers.Consumers;
-using Prototype.Subscribers.Startables;
+using Prototype.Service.Consume;
+using Prototype.Service.Data.Model;
+using Prototype.Service.Publish;
+using Prototype.Service.Routing;
+using Prototype.Service.Services;
+using Prototype.Service.Subscribe;
 
 namespace Prototype.Service.Modules
 {
     /// <summary>
     /// Niject Module to load and manage dependancies across the lifetime of the service
     /// </summary>
-    public class IocModule : NinjectModule
+    public class DependancyModule : NinjectModule
     {
         /// <summary>
         /// Bind Interfaces to implimentations for dependancy injection
@@ -31,10 +33,10 @@ namespace Prototype.Service.Modules
             Bind<ILogger>().To<Logger.Logger>().InSingletonScope();
             Bind<IMessagePublisher>().To<MessagePublisher>();
             Bind<IMessageConsumer>().To<MessageConsumer>();
-            Bind<ISubscriber>().To<SampleSubscriber>();
+            Bind<IMessageSubscriber>().To<MessageSubscriber>();
             Bind(typeof(IRepository<SampleEntity,string>)).To(typeof(MongoRepository<SampleEntity,string>));
-            Bind<IHostingEnvironment>().To<HostingEnvironment>();
-            Bind<ISampleLogic>().To<SampleBusinessLogicClass>();
+            Bind<IEnvironment>().To<Environment>();
+            Bind<IServiceLogic>().To<ServiceBusinessLogic>();
         }
     }
 }

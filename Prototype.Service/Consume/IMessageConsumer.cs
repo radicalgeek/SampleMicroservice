@@ -1,7 +1,7 @@
 ﻿using EasyNetQ;
-using Prototype.MessageTypes.Messages;
+using Prototype.Service.Messages;
 
-namespace Prototype.Subscribers.Consumers
+namespace Prototype.Service.Consume
 {
     public interface IMessageConsumer
     {

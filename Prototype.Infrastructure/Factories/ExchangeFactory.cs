@@ -1,5 +1,6 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Topology;
+using Prototype.Infrastructure.Settings;
 
 namespace Prototype.Infrastructure.Factories
 {
@@ -8,7 +9,7 @@ namespace Prototype.Infrastructure.Factories
 
         public static IExchange CreatExchange(IAdvancedBus bus)
         {
-            var environment = new HostingEnvironment();
+            var environment = new Environment();
             
             var exchange = bus.ExchangeDeclare(environment.GetEnvironmentVariable("ExchangeName"), ExchangeType.Topic);
             return exchange;

@@ -132,17 +132,9 @@
       <Project>{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}</Project>
       <Name>Prototype.Logger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Prototype.Logic\Prototype.Logic.csproj">
-      <Project>{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}</Project>
-      <Name>Prototype.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Prototype.MessageTypes\Prototype.MessageTypes.csproj">
-      <Project>{5bb2a478-21c4-42f8-9e55-656f4baca9bb}</Project>
-      <Name>Prototype.MessageTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Prototype.Subscribers\Prototype.Subscribers.csproj">
-      <Project>{339ee9f2-12f5-4e67-87bd-fc0af286d1f2}</Project>
-      <Name>Prototype.Subscribers</Name>
+    <ProjectReference Include="..\Prototype.Service\Prototype.Service.csproj">
+      <Project>{bbf92c72-30bf-46e2-8c09-35d1e4773c82}</Project>
+      <Name>Prototype.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Prototype.Tests.Helpers\Prototype.Tests.Helpers.csproj">
       <Project>{aa6310e1-91cf-4392-a4e7-f41493005a55}</Project>

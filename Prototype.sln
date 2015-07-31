@@ -10,19 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27E264
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.MessageTypes", "Prototype.MessageTypes\Prototype.MessageTypes.csproj", "{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Infrastructure", "Prototype.Infrastructure\Prototype.Infrastructure.csproj", "{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Service", "Prototype.Service\Prototype.Service.csproj", "{BBF92C72-30BF-46E2-8C09-35D1E4773C82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Subscribers", "Prototype.Subscribers\Prototype.Subscribers.csproj", "{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.TestHarness", "Prototype.TestHarness\Prototype.TestHarness.csproj", "{98814830-B35F-4374-94D7-D230825A1351}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Logger", "Prototype.Logger\Prototype.Logger.csproj", "{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Logic", "Prototype.Logic\Prototype.Logic.csproj", "{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{020367D3-99AB-4D67-AD02-B702C0E6679E}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,8 +29,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Unit", "Prototype.Tests.Unit\Prototype.Tests.Unit.csproj", "{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{286D9544-A5DA-4489-8A98-2C655341A69C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2E88AEC2-7687-4CAA-92E4-9CDC083C1316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Intergration", "Prototype.Tests.Intergration\Prototype.Tests.Intergration.csproj", "{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}"
 EndProject
@@ -58,24 +50,11 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
+		RunInDocker-OSX|Any CPU = RunInDocker-OSX|Any CPU
+		RunInDocker-OSX|Mixed Platforms = RunInDocker-OSX|Mixed Platforms
+		RunInDocker-OSX|x86 = RunInDocker-OSX|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|Any CPU.ActiveCfg = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|Any CPU.Build.0 = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|Mixed Platforms.ActiveCfg = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|Mixed Platforms.Build.0 = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|x86.ActiveCfg = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Debug-OSX|x86.Build.0 = Debug-OSX|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -92,6 +71,11 @@ Global
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|x86.ActiveCfg = Release|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.Build.0 = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -109,22 +93,11 @@ Global
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|x86.ActiveCfg = Release|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Release|x86.Build.0 = Release|x86
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|Any CPU.ActiveCfg = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|Any CPU.Build.0 = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|Mixed Platforms.ActiveCfg = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|Mixed Platforms.Build.0 = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|x86.ActiveCfg = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Debug-OSX|x86.Build.0 = Debug-OSX|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2}.Release|x86.ActiveCfg = Release|Any CPU
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|x86
+		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -140,6 +113,11 @@ Global
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|Mixed Platforms.Build.0 = Release|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|x86.ActiveCfg = Release|x86
 		{98814830-B35F-4374-94D7-D230825A1351}.Release|x86.Build.0 = Release|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|x86
+		{98814830-B35F-4374-94D7-D230825A1351}.RunInDocker-OSX|x86.Build.0 = RunInDocker-OSX|x86
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -156,22 +134,11 @@ Global
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.Release|x86.ActiveCfg = Release|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|Any CPU.ActiveCfg = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|Any CPU.Build.0 = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|Mixed Platforms.ActiveCfg = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|Mixed Platforms.Build.0 = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|x86.ActiveCfg = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Debug-OSX|x86.Build.0 = Debug-OSX|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BEF278AC-B7CE-4D62-A2E7-6ABA32E1B43F}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -188,6 +155,11 @@ Global
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -204,6 +176,11 @@ Global
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
+		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -219,16 +196,17 @@ Global
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AA6310E1-91CF-4392-A4E7-F41493005A55}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA6310E1-91CF-4392-A4E7-F41493005A55}.RunInDocker-OSX|Any CPU.ActiveCfg = Release|Any CPU
+		{AA6310E1-91CF-4392-A4E7-F41493005A55}.RunInDocker-OSX|Any CPU.Build.0 = Release|Any CPU
+		{AA6310E1-91CF-4392-A4E7-F41493005A55}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AA6310E1-91CF-4392-A4E7-F41493005A55}.RunInDocker-OSX|Mixed Platforms.Build.0 = Release|Any CPU
+		{AA6310E1-91CF-4392-A4E7-F41493005A55}.RunInDocker-OSX|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5BB2A478-21C4-42F8-9E55-656F4BACA9BB} = {2E88AEC2-7687-4CAA-92E4-9CDC083C1316}
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15} = {2E88AEC2-7687-4CAA-92E4-9CDC083C1316}
-		{339EE9F2-12F5-4E67-87BD-FC0AF286D1F2} = {2E88AEC2-7687-4CAA-92E4-9CDC083C1316}
 		{98814830-B35F-4374-94D7-D230825A1351} = {286D9544-A5DA-4489-8A98-2C655341A69C}
-		{DAA924E0-7C89-4E49-B1C6-28B66ABAC229} = {2E88AEC2-7687-4CAA-92E4-9CDC083C1316}
 		{F9162212-6CE4-4AD5-AFD5-F4AF03D89412} = {286D9544-A5DA-4489-8A98-2C655341A69C}
 		{2F2DD425-BAE2-46A4-BC3B-C722B0C6E326} = {286D9544-A5DA-4489-8A98-2C655341A69C}
 		{AA6310E1-91CF-4392-A4E7-F41493005A55} = {286D9544-A5DA-4489-8A98-2C655341A69C}

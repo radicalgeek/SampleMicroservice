@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Prototype.Logic.DataEntities;
+using Prototype.Service.Data.Model;
+
 
 namespace Prototype.Tests.Helpers
 {

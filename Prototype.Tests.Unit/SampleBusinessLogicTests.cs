@@ -11,10 +11,12 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Prototype.Infrastructure;
+using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
-using Prototype.Logic;
-using Prototype.Logic.DataEntities;
 using NUnit;
+using Prototype.Service.Data.Model;
+using Prototype.Service.Publish;
+using Prototype.Service.Routing;
 using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
@@ -34,8 +36,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             logicClass.RouteSampleMessage(TestMessages.GetTestCreateSampleEntityMessage());
 
@@ -48,8 +50,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             logicClass.RouteSampleMessage(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
@@ -62,8 +64,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var invocations = new List<string>();
             logger.Setup(l => l.Info(It.IsAny<string>(),It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
@@ -79,8 +81,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var invocations = new List<string>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
@@ -96,8 +98,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var invocations = new List<string>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
                 .Callback<string, object[]>((message, obj) => invocations.Add(message));
@@ -115,8 +117,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var invocations = new List<string>();
             logger.Setup(l => l.Error(It.IsAny<Exception>(),It.IsAny<string>(), It.IsAny<object[]>()))
                 .Callback<Exception,string, object[]>((ex,message, obj) => invocations.Add(message));
@@ -134,8 +136,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var loggerInvocations = new List<string>();
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
@@ -154,8 +156,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var loggerInvocations = new List<string>();
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
@@ -176,8 +178,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
             var loggerInvocations = new List<string>();
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
@@ -199,8 +201,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var invocations = new List<string>();
             var messageInvocations = new List<dynamic>();
             logger.Setup(l => l.Error(It.IsAny<Exception>(), It.IsAny<string>(), It.IsAny<object[]>()))
@@ -225,8 +227,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestReadSampleEntityMessage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -249,8 +251,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestReadSampleEntityMessage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -274,8 +276,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestReadSampleEntityMessage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -299,8 +301,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
 
             var message = TestMessages.GetTestReadSampleEntityMessage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -330,8 +332,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
@@ -355,8 +357,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
@@ -383,8 +385,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
@@ -411,8 +413,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
@@ -441,8 +443,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
 
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
@@ -475,8 +477,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -499,8 +501,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -524,8 +526,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new FakeRepository();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo, env.Object);
 
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -549,8 +551,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
 
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             var entitys = TestEntities.SetUpSampleEntities(message);
@@ -578,10 +580,10 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
+            var env = new Mock<IEnvironment>();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
 
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
 
             var result = logicClass.ShouldTryProcessingMessage(message);
@@ -595,8 +597,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
 
@@ -613,8 +615,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
 
             var result = logicClass.ShouldTryProcessingMessage(message);
@@ -628,8 +630,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -647,8 +649,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -666,8 +668,8 @@ namespace Prototype.Tests.Unit
             var publisher = new Mock<IMessagePublisher>();
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher.Object, repo.Object, env.Object);
+            var env = new Mock<IEnvironment>();
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher.Object, repo.Object, env.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);

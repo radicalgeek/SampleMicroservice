@@ -1,5 +1,6 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Topology;
+using Prototype.Infrastructure.Settings;
 
 namespace Prototype.Infrastructure.Factories
 {
@@ -7,7 +8,7 @@ namespace Prototype.Infrastructure.Factories
     {
         public static IQueue CreatQueue(IAdvancedBus bus)
         {
-            var environment = new HostingEnvironment();
+            var environment = new Environment();
             var queue = bus.QueueDeclare(environment.GetEnvironmentVariable("QueueName"));
             return queue;
         }

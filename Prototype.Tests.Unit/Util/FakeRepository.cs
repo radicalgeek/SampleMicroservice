@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using MongoDB.Driver;
 using MongoRepository;
-using Prototype.Logic.DataEntities;
+using Prototype.Service.Data.Model;
 
 namespace Prototype.Tests.Unit
 {

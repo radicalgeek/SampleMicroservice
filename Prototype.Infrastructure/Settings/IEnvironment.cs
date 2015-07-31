@@ -1,6 +1,6 @@
-namespace Prototype.Infrastructure
+namespace Prototype.Infrastructure.Settings
 {
-    public interface IHostingEnvironment
+    public interface IEnvironment
     {
         /// <summary>
         /// Retrive an environment variable. If the variable dosn't exist it will be created and populated from the app config
@@ -8,7 +8,6 @@ namespace Prototype.Infrastructure
         /// <param name="requestedVariable">the Variable name</param>
         /// <returns>Environment Variable</returns>
         string GetEnvironmentVariable(string requestedVariable);
-
         int GetServiceVersion();
         string GetServiceName();
     }

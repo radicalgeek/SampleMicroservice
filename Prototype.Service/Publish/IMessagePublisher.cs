@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Prototype.Infrastructure
+﻿namespace Prototype.Service.Publish
 {
     public interface IMessagePublisher
     {

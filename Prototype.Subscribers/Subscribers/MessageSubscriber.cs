@@ -1,39 +1,37 @@
 ﻿using System;
-using System.Reflection;
+using EasyNetQ;
 using EasyNetQ.Topology;
+using Prototype.Infrastructure;
 using Prototype.Logger;
 using Prototype.MessageTypes.Messages;
-using Prototype.Subscribers.Consumers;
-using EasyNetQ;
-using EasyNetQ.AutoSubscribe;
-using Prototype.Infrastructure;
+using Prototype.Messaging.Consumers;
 
-namespace Prototype.Subscribers.Startables
+namespace Prototype.Messaging.Subscribers
 {
     /// <summary>
     /// Automaticly subscribes to messages, by locating consumers for message types
     /// </summary>
-    public class SampleSubscriber : ISubscriber
+    public class MessageSubscriber : IMessageSubscriber
     {
         private readonly IAdvancedBus _bus;
         private ILogger _logger;
         private IMessageConsumer _messageConsumer;
-        private IHostingEnvironment _environment;
+        private IEnvironmentSettings _environmentSettings;
         private IDisposable Consumer;
         private IExchange _exchange;
         private IQueue _queue;
 
-        public SampleSubscriber(IAdvancedBus bus,
+        public MessageSubscriber(IAdvancedBus bus,
             IMessageConsumer messageConsumer, 
             ILogger logger, 
-            IHostingEnvironment environment,
+            IEnvironmentSettings environmentSettings,
             IExchange exchange,
             IQueue queue)
         {
             _messageConsumer = messageConsumer;
             _bus = bus;
             _logger = logger;
-            _environment = environment;
+            _environmentSettings = environmentSettings;
             _exchange = exchange;
             _queue = queue;
         }
@@ -44,11 +42,7 @@ namespace Prototype.Subscribers.Startables
         public void Start()
         {     
             _bus.Bind(_exchange, _queue, "A.*");
-
-            Consumer = _bus.Consume(_queue, dispatcher => dispatcher.Add<SampleMessage>((message, info) =>
-            {
-                _messageConsumer.Consume(message);
-            }));
+            Consumer = _bus.Consume(_queue, dispatcher => dispatcher.Add<SampleMessage>((message, info) => _messageConsumer.Consume(message)));
         }
 
         public void Stop()

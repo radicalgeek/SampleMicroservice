@@ -5,6 +5,7 @@ using NLog.Config;
 
 namespace Prototype.Logger
 {
+    //TODO: need to ensure logging format is compatible with splunk. 
     public class Logger : NLog.Logger, ILogger
     {
         private const string _loggerName = "NLogLogger";

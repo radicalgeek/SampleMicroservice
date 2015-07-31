@@ -1,4 +1,5 @@
 ﻿using EasyNetQ;
+using Prototype.Infrastructure.Settings;
 
 namespace Prototype.Infrastructure.Factories
 {
@@ -8,7 +9,7 @@ namespace Prototype.Infrastructure.Factories
       
         public static IAdvancedBus CreateMessageBus()
         {
-            var environment = new HostingEnvironment();
+            var environment = new Environment();
             var connectionString = environment.GetEnvironmentVariable("RabbitMQConnectionString");
             return RabbitHutch.CreateBus(connectionString).Advanced;
         }

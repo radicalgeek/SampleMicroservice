@@ -10,10 +10,11 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factories;
+using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
-using Prototype.Logic;
-using Prototype.Logic.DataEntities;
-using Prototype.MessageTypes.Messages;
+using Prototype.Service.Data.Model;
+using Prototype.Service.Publish;
+using Prototype.Service.Routing;
 using Prototype.Tests.Unit;
 using System.Web.Script.Serialization;
 
@@ -28,14 +29,14 @@ namespace Prototype.Tests.Intergration
 
             var logger = new Mock<ILogger>();
             var repo = new Mock<IRepository<SampleEntity>>();
-            var env = new Mock<IHostingEnvironment>();
+            var env = new Mock<IEnvironment>();
             var bus = BusFactory.CreateMessageBus();
             var queue = QueueFactory.CreatQueue(bus);
             var exchange = ExchangeFactory.CreatExchange(bus);
             bus.Bind(exchange, queue, "A.*");
             var publisher = new MessagePublisher(bus, logger.Object, exchange,queue);
 
-            var logicClass = new SampleBusinessLogicClass(logger.Object, publisher, repo.Object, env.Object);
+            var logicClass = new ServiceBusinessLogic(logger.Object, publisher, repo.Object, env.Object);
             var messageData = TestMessages.GetTestCreateSampleEntityMessage();
 
             var newEntities = new List<SampleEntity>();

@@ -1,11 +1,8 @@
-﻿using System.Reflection;
-using Ninject;
-using Prototype.Logger;
-using Prototype.Subscribers.Startables;
+﻿using Prototype.Logger;
+using Prototype.Service.Subscribe;
 using Topshelf;
-using Topshelf.Logging;
 
-namespace Prototype.Service
+namespace Prototype.Service.Services
 {
     /// <summary>
     /// Sample service to demonstrate topshelf microservice
@@ -13,12 +10,12 @@ namespace Prototype.Service
     public class SampleService : ServiceControl, ISampleService
     {
         private readonly ILogger _logger;
-        private ISubscriber _sampleSubscriber;
+        private readonly IMessageSubscriber _sampleMessageSubscriber;
 
-        public SampleService(ILogger logger, ISubscriber sampleSubscriber)
+        public SampleService(ILogger logger, IMessageSubscriber sampleMessageSubscriber)
         {
             _logger = logger;
-            _sampleSubscriber = sampleSubscriber;
+            _sampleMessageSubscriber = sampleMessageSubscriber;
         }
 
         /// <summary>
@@ -28,7 +25,7 @@ namespace Prototype.Service
         /// <returns>always returns true</returns>
         public bool Start(HostControl hostControl)
         {
-            _sampleSubscriber.Start();
+            _sampleMessageSubscriber.Start();
 
             _logger.Info("Prototype .NET Micro Service Started");
             return true;
@@ -41,7 +38,7 @@ namespace Prototype.Service
         /// <returns>always returns true</returns>
         public bool Stop(HostControl hostControl)
         {
-            _sampleSubscriber.Stop();
+            _sampleMessageSubscriber.Stop();
             _logger.Info("Prototype .NET Micro Service Stopped");
             return true;
         }

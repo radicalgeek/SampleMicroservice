@@ -2,6 +2,7 @@
 using System.Threading;
 using Prototype.Service.Modules;
 using Ninject.Modules;
+using Prototype.Service.Services;
 using Topshelf;
 using Ninject;
 using Topshelf.Ninject;
@@ -23,7 +24,7 @@ namespace Prototype.Service
              
                 var exitCode = HostFactory.Run(x =>
                 {
-                    x.UseNinject(new Prototype.Service.Modules.IocModule());
+                    x.UseNinject(new Prototype.Service.Modules.DependancyModule());
 
                     x.Service<SampleService>(s =>
                     {

@@ -5,10 +5,11 @@ using EasyNetQ;
 using Moq;
 using NUnit.Framework;
 using Prototype.Logger;
-using Prototype.Logic;
-using Prototype.MessageTypes.Messages;
-using Prototype.Subscribers.Consumers;
+using Prototype;
 using System.Web.Script.Serialization;
+using Prototype.Service.Consume;
+using Prototype.Service.Messages;
+using Prototype.Service.Routing;
 using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
@@ -24,7 +25,7 @@ namespace Prototype.Tests.Unit
         public void ConsumeSendsMessageToLogicLayer()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
 
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
@@ -38,7 +39,7 @@ namespace Prototype.Tests.Unit
         public void PublishLogsMessageRecived()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
@@ -54,7 +55,7 @@ namespace Prototype.Tests.Unit
         public void PublishLogsMessageProccessingBegun()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
@@ -70,7 +71,7 @@ namespace Prototype.Tests.Unit
         public void PublishLogsMessageProccessingSucceded()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
@@ -86,7 +87,7 @@ namespace Prototype.Tests.Unit
         public void PublishLogsMessageProccessingFailed()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();
@@ -103,7 +104,7 @@ namespace Prototype.Tests.Unit
         public void PublishLogsExecutionTime()
         {
             var logger = new Mock<ILogger>();
-            var logicLayer = new Mock<ISampleLogic>();
+            var logicLayer = new Mock<IServiceLogic>();
             var consumer = new MessageConsumer(logger.Object, logicLayer.Object);
             var serializer = new JavaScriptSerializer();
             var invocations = new List<string>();

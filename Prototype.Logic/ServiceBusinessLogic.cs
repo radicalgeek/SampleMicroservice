@@ -5,6 +5,7 @@ using Microsoft.CSharp.RuntimeBinder;
 using Prototype.Infrastructure;
 using Prototype.Logger;
 using Prototype.Logic.DataEntities;
+using Prototype.Messaging;
 using MongoRepository;
 
 namespace Prototype.Logic
@@ -12,19 +13,19 @@ namespace Prototype.Logic
     /// <summary>
     /// This class proccesses incoming messages, and persists them to the data store
     /// </summary>
-    public class SampleBusinessLogicClass : ISampleLogic
+    public class ServiceBusinessLogic : IServiceLogic
     {
         private IRepository<SampleEntity,string> _sampleEntityRepository = new MongoRepository<SampleEntity,string>();
         private ILogger _logger;
         private IMessagePublisher _publisher;
-        private IHostingEnvironment _environment;
+        private IEnvironmentSettings _environmentSettings;
 
-        public SampleBusinessLogicClass(ILogger logger, IMessagePublisher publisher, IRepository<SampleEntity, string> sampleRepository, IHostingEnvironment environment)
+        public ServiceBusinessLogic(ILogger logger, IMessagePublisher publisher, IRepository<SampleEntity, string> sampleRepository, IEnvironmentSettings environmentSettings)
         {
             _logger = logger;
             _publisher = publisher;
             _sampleEntityRepository = sampleRepository;
-            _environment = environment;
+            _environmentSettings = environmentSettings;
         }
 
         /// <summary>
@@ -56,8 +57,8 @@ namespace Prototype.Logic
         public bool ShouldTryProcessingMessage(dynamic message)
         {
 
-            var servicename = _environment.GetServiceName();
-            int currentMajorVersion = _environment.GetServiceVersion();
+            var servicename = _environmentSettings.GetServiceName();
+            int currentMajorVersion = _environmentSettings.GetServiceVersion();
 
             if (servicename == message.ModifiedBy)
                 return false;
@@ -185,7 +186,7 @@ namespace Prototype.Logic
         public void PublishSuccessMessage(dynamic orignalMessage, List<SampleEntity> entities, string topic )
         {
             orignalMessage.ModifiedTime = DateTime.Now.ToUniversalTime();
-            orignalMessage.ModifiedBy = _environment.GetServiceName();
+            orignalMessage.ModifiedBy = _environmentSettings.GetServiceName();
             var solutions = new List<dynamic>();
 
             foreach (var sampleEntity in entities)

@@ -8,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Prototype.Infrastructure;
 using Prototype.Logger;
-using Prototype.MessageTypes.Messages;
+using Prototype.Service.Publish;
 using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit

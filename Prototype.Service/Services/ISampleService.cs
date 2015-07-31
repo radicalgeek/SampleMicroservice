@@ -1,6 +1,6 @@
 ﻿using Topshelf;
 
-namespace Prototype.Service
+namespace Prototype.Service.Services
 {
     public interface ISampleService
     {

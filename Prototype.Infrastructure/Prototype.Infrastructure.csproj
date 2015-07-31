@@ -81,11 +81,9 @@
   <ItemGroup>
     <Compile Include="Factories\ExchangeFactory.cs" />
     <Compile Include="Factories\QueueFactory.cs" />
-    <Compile Include="HostingEnvironment.cs" />
-    <Compile Include="IHostingEnvironment.cs" />
-    <Compile Include="IMessagePublisher.cs" />
+    <Compile Include="Settings\Environment.cs" />
+    <Compile Include="Settings\IEnvironment.cs" />
     <Compile Include="Factories\BusFactory.cs" />
-    <Compile Include="MessagePublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

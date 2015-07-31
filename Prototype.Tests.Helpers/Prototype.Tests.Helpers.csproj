@@ -55,15 +55,15 @@
     <Compile Include="TestMessages.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prototype.Logic\Prototype.Logic.csproj">
-      <Project>{bef278ac-b7ce-4d62-a2e7-6aba32e1b43f}</Project>
-      <Name>Prototype.Logic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="MongoRepository.chm" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Prototype.Service\Prototype.Service.csproj">
+      <Project>{bbf92c72-30bf-46e2-8c09-35d1e4773c82}</Project>
+      <Name>Prototype.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

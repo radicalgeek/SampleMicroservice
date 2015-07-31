@@ -1,10 +1,8 @@
-﻿using System;
-using EasyNetQ;
+﻿using EasyNetQ;
 using EasyNetQ.Topology;
 using Prototype.Logger;
 
-
-namespace Prototype.Infrastructure
+namespace Prototype.Service.Publish
 {
     /// <summary>
     /// Class to publish messages to the bus
@@ -13,7 +11,7 @@ namespace Prototype.Infrastructure
     {
         private readonly IAdvancedBus _bus;
         private readonly ILogger _logger;
-        private IExchange _exchange;
+        private readonly IExchange _exchange;
         private IQueue _queue;
         
         public MessagePublisher(IAdvancedBus bus, ILogger logger, IExchange exchange, IQueue queue)
