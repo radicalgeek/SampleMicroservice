@@ -1,7 +1,6 @@
 ﻿using EasyNetQ;
-using System.Configuration;
 
-namespace Prototype.Infrastructure.Factory
+namespace Prototype.Infrastructure.Factories
 {
     public static class BusFactory
     {

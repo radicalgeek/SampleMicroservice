@@ -2,7 +2,7 @@
 using EasyNetQ;
 using NUnit.Framework;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factory;
+using Prototype.Infrastructure.Factories;
 using Moq;
 
 namespace Prototype.Tests.Intergration

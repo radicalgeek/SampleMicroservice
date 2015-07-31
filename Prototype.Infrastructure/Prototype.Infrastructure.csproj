@@ -79,15 +79,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\ExchangeFactory.cs" />
-    <Compile Include="Factory\QueueFactory.cs" />
+    <Compile Include="Factories\ExchangeFactory.cs" />
+    <Compile Include="Factories\QueueFactory.cs" />
     <Compile Include="HostingEnvironment.cs" />
     <Compile Include="IHostingEnvironment.cs" />
     <Compile Include="IMessagePublisher.cs" />
-    <Compile Include="Factory\BusFactory.cs" />
+    <Compile Include="Factories\BusFactory.cs" />
     <Compile Include="MessagePublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serializers\DynamicJsonConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

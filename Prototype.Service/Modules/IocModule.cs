@@ -5,12 +5,11 @@ using MongoRepository;
 using Ninject;
 using Ninject.Modules;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factory;
+using Prototype.Infrastructure.Factories;
 using Prototype.Logger;
 using Prototype.Logic;
 using Prototype.Logic.DataEntities;
 using Prototype.Subscribers.Consumers;
-using Prototype.Subscribers.Dispatcher;
 using Prototype.Subscribers.Startables;
 
 namespace Prototype.Service.Modules
@@ -33,7 +32,6 @@ namespace Prototype.Service.Modules
             Bind<IMessagePublisher>().To<MessagePublisher>();
             Bind<IMessageConsumer>().To<MessageConsumer>();
             Bind<ISubscriber>().To<SampleSubscriber>();
-            Bind<IAutoSubscriberMessageDispatcher>().To<MessageDispatcher>();
             Bind(typeof(IRepository<SampleEntity,string>)).To(typeof(MongoRepository<SampleEntity,string>));
             Bind<IHostingEnvironment>().To<HostingEnvironment>();
             Bind<ISampleLogic>().To<SampleBusinessLogicClass>();

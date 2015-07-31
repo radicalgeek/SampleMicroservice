@@ -4,7 +4,7 @@ using EasyNetQ;
 using Moq;
 using NUnit.Framework;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factory;
+using Prototype.Infrastructure.Factories;
 
 namespace Prototype.Tests.Unit
 {

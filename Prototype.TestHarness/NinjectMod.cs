@@ -2,7 +2,7 @@
 using EasyNetQ;
 using Ninject.Modules;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factory;
+using Prototype.Infrastructure.Factories;
 using Prototype.Logger;
 
 

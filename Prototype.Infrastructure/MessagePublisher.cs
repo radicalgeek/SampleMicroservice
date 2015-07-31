@@ -37,9 +37,7 @@ namespace Prototype.Infrastructure
                 var messageContainer = new Message<dynamic>(message);
 
                 _logger.Info("Publishing Message: {0}", message);
-                _bus.Publish(_exchange, topic, false, false, messageContainer);
-                
-
+                _bus.Publish(_exchange, topic, false, false, messageContainer); 
                 _logger.Info("Publish Message succeded");
             }
             catch (EasyNetQException ex)

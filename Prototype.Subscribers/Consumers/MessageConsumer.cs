@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Web.Script.Serialization;
-using Prototype.Infrastructure.Serializers;
 using EasyNetQ;
-using Prototype.Infrastructure.Serializers;
 using Prototype.Logger;
-using EasyNetQ.AutoSubscribe;
 using Newtonsoft.Json;
 using Prototype.Logic;
 using Prototype.MessageTypes.Messages;
@@ -64,10 +60,7 @@ namespace Prototype.Subscribers.Consumers
         /// <returns>dynamic object</returns>
         private static dynamic GetDynamicMessageObject(SampleMessage message)
         {
-            var serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new[] {new DynamicJsonConverter()});
-            dynamic dynamicMessageObject = serializer.Deserialize(message.Message, typeof (object));
-            return dynamicMessageObject;
+            return JsonConvert.SerializeObject(message);           
         }
 
         /// <summary>

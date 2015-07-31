@@ -4,7 +4,6 @@ using EasyNetQ.Topology;
 using Prototype.Logger;
 using Prototype.MessageTypes.Messages;
 using Prototype.Subscribers.Consumers;
-using Prototype.Subscribers.Dispatcher;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using Prototype.Infrastructure;

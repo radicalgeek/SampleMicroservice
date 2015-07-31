@@ -119,7 +119,6 @@
     <Compile Include="BusFactoryTests.cs" />
     <Compile Include="Util\FakeRepository.cs" />
     <Compile Include="MessageConsumerTests.cs" />
-    <Compile Include="MessageDispatcherTests.cs" />
     <Compile Include="MessagePublisherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleBusinessLogicTests.cs" />

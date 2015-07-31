@@ -9,7 +9,7 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factory;
+using Prototype.Infrastructure.Factories;
 using Prototype.Logger;
 using Prototype.Logic;
 using Prototype.Logic.DataEntities;
