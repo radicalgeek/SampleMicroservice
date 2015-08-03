@@ -12,10 +12,8 @@ namespace Prototype.Service
     {
         public static int Main(string[] args)
         {
-
             Thread.CurrentThread.Name = "Service Main Thread";
-            
-             
+
                 var exitCode = HostFactory.Run(x =>
                 {
                     x.UseNinject(new Modules.DependancyModule());

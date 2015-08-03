@@ -155,6 +155,42 @@ You can now intergration test this solution. Note that logs will be stored in /v
 
 Remote Build:
 
+All code should be commited to Git. 
+
+
+-----------------------------------------------------------------------------------------------
+Message contracts and Queue requirments:
+
+a typical message fontract is a JSON object that looks like this. 
+
+{ “uuid”: “12345678-1234-1234-1234-1234567890AB”,             //standard Guid format
+  “modifiedBy”: “user-service”,                               //the last service to decorate this message
+  “modifyTime”: “2015-08-03T13:07:51.4005517Z”,               //Date/Time in Coordinated Universal time (UTC)
+  “source”: “ui-api”,										  //the service that initiated the message
+  “pubTime”: “2015-08-03T13:07:51.4005517Z”,                  //Date/Time in Coordinated Universal time (UTC)
+  “method”: “get”,                                            //the "method" is a HTTP operation name that maps to crud opperations
+  “need”:
+    { “UserUuid”: “12345678-1234-1234-1234-1234567890AB” }    //A list of Needs. The user Id "Needed" for product service this would be ProductUuid
+  “solutions”:												  //A List of complex object that services decorate the message with
+    [ { “firstname”: “John”,
+         “lastname”: “Doe” },
+      { “product”: “digiwise” },
+      { “status”: “active” } ]
+ }
+
+
+ Needs and solutions differ depending on the data required or Needed. 
+
+ Needs represent a service requesting something, where as a Solution represents a service providing something. 
+
+ All messages are sent to a common exchange that copies the messages on to every queue. Each service has it's own queue. 
+
+
+ UserService    -> |                        | -> UserServiceQueue    -> UserService
+                   | -> message Exchange -> |
+ ProductService -> |                        | -> ProductServiceQueue -> ProductService
+
+ This way all services opperate on messages in parallel. 
 
 -----------------------------------------------------------------------------------------------
 
