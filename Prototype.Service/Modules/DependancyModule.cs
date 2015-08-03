@@ -3,17 +3,18 @@ using EasyNetQ.Topology;
 using MongoRepository;
 using Ninject;
 using Ninject.Modules;
-using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factories;
-using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
 using Prototype.Service.Consume;
 using Prototype.Service.Data;
 using Prototype.Service.Data.Model;
+using Prototype.Service.Factories;
+using Prototype.Service.Filters;
 using Prototype.Service.Publish;
 using Prototype.Service.Routing;
 using Prototype.Service.Services;
 using Prototype.Service.Subscribe;
+using Environment = Prototype.Service.Settings.Environment;
+using IEnvironment = Prototype.Service.Settings.IEnvironment;
 
 namespace Prototype.Service.Modules
 {
@@ -39,6 +40,7 @@ namespace Prototype.Service.Modules
             Bind<IEnvironment>().To<Environment>();
             Bind<IMessageRouter>().To<MessageRouter>();
             Bind<IDataOperations>().To<DataOperations>();
+            Bind<IMessageFilter>().To<IMessageFilter>();
         }
     }
 }

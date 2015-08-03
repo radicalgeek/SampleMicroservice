@@ -1,13 +1,7 @@
-﻿using System.Reflection;
-using System.Threading;
-using Prototype.Service.Modules;
-using Ninject.Modules;
+﻿using System.Threading;
 using Prototype.Service.Services;
 using Topshelf;
-using Ninject;
 using Topshelf.Ninject;
-using Ninject.Modules;
-using System.Runtime.Remoting.Services;
 
 namespace Prototype.Service
 {
@@ -24,7 +18,7 @@ namespace Prototype.Service
              
                 var exitCode = HostFactory.Run(x =>
                 {
-                    x.UseNinject(new Prototype.Service.Modules.DependancyModule());
+                    x.UseNinject(new Modules.DependancyModule());
 
                     x.Service<SampleService>(s =>
                     {

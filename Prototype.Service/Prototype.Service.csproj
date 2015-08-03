@@ -133,6 +133,11 @@
     <Compile Include="Data\EntityMapper.cs" />
     <Compile Include="Data\IDataOperations.cs" />
     <Compile Include="Data\Model\SampleEntity.cs" />
+    <Compile Include="Factories\BusFactory.cs" />
+    <Compile Include="Factories\ExchangeFactory.cs" />
+    <Compile Include="Factories\QueueFactory.cs" />
+    <Compile Include="Filters\IMessageFilter.cs" />
+    <Compile Include="Filters\MessageFilter.cs" />
     <Compile Include="Messages\IBusMessage.cs" />
     <Compile Include="Messages\SampleMessage.cs" />
     <Compile Include="Publish\IMessagePublisher.cs" />
@@ -144,6 +149,8 @@
     <Compile Include="Services\SampleService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Environment.cs" />
+    <Compile Include="Settings\IEnvironment.cs" />
     <Compile Include="Subscribe\IMessageSubscriber.cs" />
     <Compile Include="Subscribe\MessageSubscriber.cs" />
   </ItemGroup>
@@ -160,10 +167,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
-      <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
-      <Name>Prototype.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
       <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
       <Name>Prototype.Logger</Name>

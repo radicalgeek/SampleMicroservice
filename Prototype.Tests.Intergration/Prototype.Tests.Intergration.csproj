@@ -101,10 +101,6 @@
     <Compile Include="QueueOpperationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
-      <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
-      <Name>Prototype.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
       <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
       <Name>Prototype.Logger</Name>

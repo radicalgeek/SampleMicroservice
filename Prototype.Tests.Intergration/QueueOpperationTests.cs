@@ -4,18 +4,22 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyNetQ;
 using MongoRepository;
 using Moq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factories;
-using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
+using Prototype.Service.Consume;
 using Prototype.Service.Data;
 using Prototype.Service.Data.Model;
+using Prototype.Service.Factories;
+using Prototype.Service.Filters;
+using Prototype.Service.Messages;
 using Prototype.Service.Publish;
 using Prototype.Service.Routing;
+using Prototype.Service.Settings;
+using Prototype.Service.Subscribe;
 using Prototype.Tests.Unit;
 using System.Web.Script.Serialization;
 
@@ -38,7 +42,8 @@ namespace Prototype.Tests.Intergration
             var publisher = new MessagePublisher(bus, logger.Object, exchange,queue);
 
             var dataOps = new DataOperations(logger.Object, publisher,repo.Object,env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps);
+            var filter = new MessageFilter(env.Object);
+            var logicClass = new MessageRouter(env.Object, dataOps, filter);
             var messageData = TestMessages.GetTestCreateSampleEntityMessage();
             env.Setup(e => e.GetServiceName()).Returns("Fake-Service");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -56,12 +61,6 @@ namespace Prototype.Tests.Intergration
             };
             newEntities.Add(entity);
             var recivedMessages = new List<dynamic>();
-            
-            //var subscription = bus.Subscribe<dynamic>("test_id", msg => recivedMessages.Add(msg));
-            //bus.Consume(queue, dispatcher => dispatcher.Add<SampleMessage>((message, info) =>
-            //{
-            //    recivedMessages.Add(message);
-            //}));
 
             var consumer = bus.Consume<object>(queue, (message, info) =>  
                  Task.Factory.StartNew(() =>  
@@ -69,13 +68,36 @@ namespace Prototype.Tests.Intergration
                      )
                  );
 
-            //System.Threading.Thread.Sleep(5000);
             logicClass.RouteSampleMessage(messageData);
             System.Threading.Thread.Sleep(5000);
 
             consumer.Dispose();
             Assert.IsTrue(recivedMessages.Count >= 1);
             
+        }
+
+        [Test]
+        public void ServiceConsumesMessage()
+        {
+            var env = new Mock<IEnvironment>();
+            var logger = new Mock<ILogger>();
+            var messageConsumer = new Mock<IMessageConsumer>();
+            var bus = BusFactory.CreateMessageBus();
+            var queue = QueueFactory.CreatQueue(bus);
+            var exchange = ExchangeFactory.CreatExchange(bus);
+            bus.Bind(exchange, queue, "A.*");
+
+            var messageData = TestMessages.GetTestCreateSampleEntityMessage();
+            var serializedMessage = Newtonsoft.Json.JsonConvert.SerializeObject(messageData);
+            var messageContainer = new Message<dynamic>(serializedMessage);
+
+            var messageSubscriber = new MessageSubscriber(bus, messageConsumer.Object, logger.Object, env.Object, exchange, queue);
+            messageSubscriber.Start();
+
+            bus.Publish(exchange, "A.B", false, false, messageContainer);
+            System.Threading.Thread.Sleep(10000);
+            messageConsumer.Verify(c => c.Consume(It.IsAny<object>()), Times.Once());
+            messageSubscriber.Stop();
         }
 
         public class TestMessage

@@ -4,6 +4,7 @@ using Ninject.Modules;
 using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factories;
 using Prototype.Logger;
+using Prototype.Service.Factories;
 
 
 namespace Prototype.TestHarness

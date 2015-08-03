@@ -1,9 +1,8 @@
 ﻿using System;
 using EasyNetQ;
 using NUnit.Framework;
-using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factories;
 using Moq;
+using Prototype.Service.Factories;
 
 namespace Prototype.Tests.Intergration
 {

@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27E264
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Infrastructure", "Prototype.Infrastructure\Prototype.Infrastructure.csproj", "{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Service", "Prototype.Service\Prototype.Service.csproj", "{BBF92C72-30BF-46E2-8C09-35D1E4773C82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.TestHarness", "Prototype.TestHarness\Prototype.TestHarness.csproj", "{98814830-B35F-4374-94D7-D230825A1351}"
@@ -55,27 +53,6 @@ Global
 		RunInDocker-OSX|x86 = RunInDocker-OSX|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|Any CPU.ActiveCfg = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|Any CPU.Build.0 = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|Mixed Platforms.ActiveCfg = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|Mixed Platforms.Build.0 = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|x86.ActiveCfg = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Debug-OSX|x86.Build.0 = Debug-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.Release|x86.ActiveCfg = Release|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.ActiveCfg = RunInDocker-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Any CPU.Build.0 = RunInDocker-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.ActiveCfg = RunInDocker-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|Mixed Platforms.Build.0 = RunInDocker-OSX|Any CPU
-		{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}.RunInDocker-OSX|x86.ActiveCfg = RunInDocker-OSX|Any CPU
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Any CPU.Build.0 = Debug|x86
 		{BBF92C72-30BF-46E2-8C09-35D1E4773C82}.Debug|Mixed Platforms.ActiveCfg = Debug|x86

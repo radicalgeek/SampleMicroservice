@@ -30,7 +30,7 @@ namespace Prototype.Service.Consume
         /// them passing it to a business logic layer
         /// </summary>
         /// <param name="message">Sample message from bus with JSON string</param>
-        public void Consume(IMessage<SampleMessage> message)
+        public void Consume(dynamic message)
         {
             var stopwatch = GetStopwatch();
 

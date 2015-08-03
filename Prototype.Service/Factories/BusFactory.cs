@@ -1,12 +1,11 @@
 ﻿using EasyNetQ;
-using Prototype.Infrastructure.Settings;
+using Environment = Prototype.Service.Settings.Environment;
 
-namespace Prototype.Infrastructure.Factories
+namespace Prototype.Service.Factories
 {
     public static class BusFactory
     {
- 
-      
+
         public static IAdvancedBus CreateMessageBus()
         {
             var environment = new Environment();

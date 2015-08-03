@@ -1,8 +1,8 @@
 ﻿using EasyNetQ;
 using EasyNetQ.Topology;
-using Prototype.Infrastructure.Settings;
+using Environment = Prototype.Service.Settings.Environment;
 
-namespace Prototype.Infrastructure.Factories
+namespace Prototype.Service.Factories
 {
     public static class QueueFactory
     {

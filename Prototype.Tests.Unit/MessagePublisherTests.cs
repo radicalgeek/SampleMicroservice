@@ -6,7 +6,6 @@ using EasyNetQ;
 using EasyNetQ.Topology;
 using Moq;
 using NUnit.Framework;
-using Prototype.Infrastructure;
 using Prototype.Logger;
 using Prototype.Service.Publish;
 using Prototype.Tests.Helpers;

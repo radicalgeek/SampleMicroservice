@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="BusFactoryTests.cs" />
     <Compile Include="DataOpperationTests.cs" />
+    <Compile Include="MessageFilterTests.cs" />
     <Compile Include="Util\FakeRepository.cs" />
     <Compile Include="MessageConsumerTests.cs" />
     <Compile Include="MessagePublisherTests.cs" />
@@ -125,10 +126,6 @@
     <Compile Include="MessageRoutingTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prototype.Infrastructure\Prototype.Infrastructure.csproj">
-      <Project>{B079BA9A-1BC7-47B3-AC8D-ECB932229C15}</Project>
-      <Name>Prototype.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Prototype.Logger\Prototype.Logger.csproj">
       <Project>{DAA924E0-7C89-4E49-B1C6-28B66ABAC229}</Project>
       <Name>Prototype.Logger</Name>

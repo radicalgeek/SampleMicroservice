@@ -79,11 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factories\ExchangeFactory.cs" />
-    <Compile Include="Factories\QueueFactory.cs" />
-    <Compile Include="Settings\Environment.cs" />
-    <Compile Include="Settings\IEnvironment.cs" />
-    <Compile Include="Factories\BusFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +90,9 @@
       <Project>{daa924e0-7c89-4e49-b1c6-28b66abac229}</Project>
       <Name>Prototype.Logger</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

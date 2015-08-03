@@ -10,6 +10,6 @@ namespace Prototype.Service.Consume
         /// them passing it to a business logic layer
         /// </summary>
         /// <param name="message">Sample message from bus with JSON string</param>
-        void Consume(IMessage<SampleMessage> message);
+        void Consume(dynamic message);
     }
 }

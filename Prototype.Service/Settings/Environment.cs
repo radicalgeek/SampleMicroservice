@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 
-namespace Prototype.Infrastructure.Settings
+namespace Prototype.Service.Settings
 {
     /// <summary>
     /// This class retrives values from environment variables. If the requested variable is not found, then it will be

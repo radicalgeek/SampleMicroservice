@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using Microsoft.CSharp.RuntimeBinder;
-using MongoRepository;
-using Prototype.Infrastructure.Settings;
-using Prototype.Logger;
 using Prototype.Service.Data;
-using Prototype.Service.Data.Model;
-using Prototype.Service.Publish;
+using Prototype.Service.Filters;
+using IEnvironment = Prototype.Service.Settings.IEnvironment;
 
 namespace Prototype.Service.Routing
 {
@@ -19,11 +13,13 @@ namespace Prototype.Service.Routing
         
         private readonly IEnvironment _environment;
         private readonly IDataOperations _dataOperations;
+        private readonly IMessageFilter _filter;
 
-        public MessageRouter(IEnvironment environment, IDataOperations dataOperations)
+        public MessageRouter(IEnvironment environment, IDataOperations dataOperations, IMessageFilter filter)
         {
             _environment = environment;
             _dataOperations = dataOperations;
+            _filter = filter;
         }
 
         /// <summary>
@@ -32,7 +28,7 @@ namespace Prototype.Service.Routing
         /// <param name="message">dynamic message object from the bus keeps contracts loosly coupled</param>
         public void RouteSampleMessage(dynamic message)
         {
-            if (ShouldTryProcessingMessage(message))
+            if (_filter.ShouldTryProcessingMessage(message))
             {
                 switch ((string) message.Method.ToString())
                 {
@@ -52,31 +48,7 @@ namespace Prototype.Service.Routing
             }
         }
 
-        public bool ShouldTryProcessingMessage(dynamic message)
-        {
-            var servicename = _environment.GetServiceName();
-            int currentMajorVersion = _environment.GetServiceVersion();
-
-            if (servicename == message.ModifiedBy)
-                return false;
-
-            try
-            {
-                foreach (var versionRequirement in message.CompatibleServiceVersions)
-                {
-                    if (versionRequirement.Service == servicename)
-                    {
-                        if (versionRequirement.Version > currentMajorVersion)
-                            return false;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return true;
-            }
-            return true;
-        }
+        
 
       
     }

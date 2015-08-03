@@ -3,8 +3,7 @@ using System.Configuration;
 using EasyNetQ;
 using Moq;
 using NUnit.Framework;
-using Prototype.Infrastructure;
-using Prototype.Infrastructure.Factories;
+using Prototype.Service.Factories;
 
 namespace Prototype.Tests.Unit
 {

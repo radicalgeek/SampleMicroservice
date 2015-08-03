@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoRepository;
-using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
 using Prototype.Service.Data.Model;
 using Prototype.Service.Publish;
+using IEnvironment = Prototype.Service.Settings.IEnvironment;
 
 namespace Prototype.Service.Data
 {

@@ -7,12 +7,12 @@ using MongoRepository;
 using Moq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
 using Prototype.Service.Data;
 using Prototype.Service.Data.Model;
 using Prototype.Service.Publish;
 using Prototype.Service.Routing;
+using Prototype.Service.Settings;
 using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit

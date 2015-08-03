@@ -1,4 +1,4 @@
-namespace Prototype.Infrastructure.Settings
+namespace Prototype.Service.Settings
 {
     public interface IEnvironment
     {
