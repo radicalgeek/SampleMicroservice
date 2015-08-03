@@ -17,12 +17,12 @@ namespace Prototype.Service.Consume
     public class MessageConsumer : IMessageConsumer
     {
         private readonly ILogger _logger;
-        private readonly IServiceLogic _serviceLogic;
+        private readonly IMessageRouter _messageRouter;
 
-        public MessageConsumer(ILogger logger, IServiceLogic serviceLogicLayer)
+        public MessageConsumer(ILogger logger, IMessageRouter messageRouter)
         {
             _logger = logger;
-            _serviceLogic = serviceLogicLayer;
+            _messageRouter = messageRouter;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Prototype.Service.Consume
             try
             {
                 _logger.Info("Proccessing message {0} begun", message.Properties.CorrelationId);
-                _serviceLogic.RouteSampleMessage(dynamicMessageObject);
+                _messageRouter.RouteSampleMessage(dynamicMessageObject);
                 _logger.Info("Proccessing message {0} Succeded", message.Properties.CorrelationId);
             }
             catch (Exception ex)

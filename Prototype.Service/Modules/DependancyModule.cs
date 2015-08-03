@@ -8,6 +8,7 @@ using Prototype.Infrastructure.Factories;
 using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
 using Prototype.Service.Consume;
+using Prototype.Service.Data;
 using Prototype.Service.Data.Model;
 using Prototype.Service.Publish;
 using Prototype.Service.Routing;
@@ -36,7 +37,8 @@ namespace Prototype.Service.Modules
             Bind<IMessageSubscriber>().To<MessageSubscriber>();
             Bind(typeof(IRepository<SampleEntity,string>)).To(typeof(MongoRepository<SampleEntity,string>));
             Bind<IEnvironment>().To<Environment>();
-            Bind<IServiceLogic>().To<ServiceBusinessLogic>();
+            Bind<IMessageRouter>().To<MessageRouter>();
+            Bind<IDataOperations>().To<DataOperations>();
         }
     }
 }

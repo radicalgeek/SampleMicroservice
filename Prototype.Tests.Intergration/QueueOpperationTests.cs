@@ -12,6 +12,7 @@ using Prototype.Infrastructure;
 using Prototype.Infrastructure.Factories;
 using Prototype.Infrastructure.Settings;
 using Prototype.Logger;
+using Prototype.Service.Data;
 using Prototype.Service.Data.Model;
 using Prototype.Service.Publish;
 using Prototype.Service.Routing;
@@ -36,8 +37,11 @@ namespace Prototype.Tests.Intergration
             bus.Bind(exchange, queue, "A.*");
             var publisher = new MessagePublisher(bus, logger.Object, exchange,queue);
 
-            var logicClass = new ServiceBusinessLogic(logger.Object, publisher, repo.Object, env.Object);
+            var dataOps = new DataOperations(logger.Object, publisher,repo.Object,env.Object);
+            var logicClass = new MessageRouter(env.Object, dataOps);
             var messageData = TestMessages.GetTestCreateSampleEntityMessage();
+            env.Setup(e => e.GetServiceName()).Returns("Fake-Service");
+            env.Setup(e => e.GetServiceVersion()).Returns(2);
 
             var newEntities = new List<SampleEntity>();
             var entity = new SampleEntity
@@ -66,8 +70,7 @@ namespace Prototype.Tests.Intergration
                  );
 
             //System.Threading.Thread.Sleep(5000);
-
-            logicClass.PublishSuccessMessage(messageData, newEntities, "A.B");
+            logicClass.RouteSampleMessage(messageData);
             System.Threading.Thread.Sleep(5000);
 
             consumer.Dispose();

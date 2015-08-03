@@ -129,13 +129,16 @@
   <ItemGroup>
     <Compile Include="Consume\IMessageConsumer.cs" />
     <Compile Include="Consume\MessageConsumer.cs" />
+    <Compile Include="Data\DataOperations.cs" />
+    <Compile Include="Data\EntityMapper.cs" />
+    <Compile Include="Data\IDataOperations.cs" />
     <Compile Include="Data\Model\SampleEntity.cs" />
     <Compile Include="Messages\IBusMessage.cs" />
     <Compile Include="Messages\SampleMessage.cs" />
     <Compile Include="Publish\IMessagePublisher.cs" />
     <Compile Include="Publish\MessagePublisher.cs" />
-    <Compile Include="Routing\IServiceLogic.cs" />
-    <Compile Include="Routing\ServiceBusinessLogic.cs" />
+    <Compile Include="Routing\IMessageRouter.cs" />
+    <Compile Include="Routing\MessageRouter.cs" />
     <Compile Include="Services\ISampleService.cs" />
     <Compile Include="Modules\DependancyModule.cs" />
     <Compile Include="Services\SampleService.cs" />
