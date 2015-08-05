@@ -17,6 +17,7 @@ using Prototype.Tests.Helpers;
 
 namespace Prototype.Tests.Unit
 {
+    [TestFixture]
     public class DataOpperationTests
     {
         #region Create
