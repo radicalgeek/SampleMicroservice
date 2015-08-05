@@ -31,6 +31,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8FEA6D9-FE9A-456E-B76C-81DEC29635D9}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Ninject.dll = lib\Ninject.dll
+		lib\Topshelf.Ninject.dll = lib\Topshelf.Ninject.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.Tests.Helpers", "Prototype.Tests.Helpers\Prototype.Tests.Helpers.csproj", "{AA6310E1-91CF-4392-A4E7-F41493005A55}"
