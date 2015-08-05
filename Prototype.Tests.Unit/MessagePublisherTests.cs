@@ -26,7 +26,7 @@ namespace Prototype.Tests.Unit
 
             var messagePublisher = new MessagePublisher(bus.Object, logger.Object,exchange.Object,queue.Object);
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "A.B");
+            messagePublisher.Publish(TestMessages.GetTestReadSampleEntityMessage(), "A.B");
 
             bus.Verify(o => o.Publish<object>(It.IsAny<IExchange>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IMessage<object>>()), Times.Once());
         }
@@ -62,7 +62,7 @@ namespace Prototype.Tests.Unit
             logger.Setup(loggerObj => loggerObj.Info(It.IsAny<string>()))
                 .Callback<string, Object[]>((message, obj) => invocations.Add(message));
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "A.B");
+            messagePublisher.Publish(TestMessages.GetTestReadSampleEntityMessage(), "A.B");
 
             Assert.IsTrue(invocations[1].Contains("Publish Message succeded"));
         }
@@ -82,7 +82,7 @@ namespace Prototype.Tests.Unit
             bus.Setup(busObj => busObj.Publish<object>(It.IsAny<IExchange>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IMessage<object>>()))
                 .Throws(new EasyNetQException("Test error"));
 
-            messagePublisher.Publish(TestMessages.GetTestNeedUserMessage(), "A.B");
+            messagePublisher.Publish(TestMessages.GetTestReadSampleEntityMessage(), "A.B");
 
             Assert.IsTrue(invocations[0].Contains("Publish Message Failed: "));
         }
