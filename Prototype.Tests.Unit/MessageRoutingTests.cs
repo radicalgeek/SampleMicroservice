@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using EasyNetQ;
 using MongoDB.Bson;
@@ -34,8 +35,9 @@ namespace Prototype.Tests.Unit
         {
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps.Object, filter);
+            var logger = new Mock<ILogger>();
+            var filter = new MessageFilter(env.Object, logger.Object);
+            var logicClass = new MessageRouter(logger.Object, dataOps.Object, filter);
             var message = TestMessages.GetTestCreateSampleEntityMessage();
 
             logicClass.RouteSampleMessage(message);
@@ -48,8 +50,9 @@ namespace Prototype.Tests.Unit
         {    
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps.Object, filter);
+            var logger = new Mock<ILogger>();
+            var filter = new MessageFilter(env.Object, logger.Object);
+            var logicClass = new MessageRouter(logger.Object, dataOps.Object, filter);
             var message = TestMessages.GetTestReadSampleEntityMessage();
 
             logicClass.RouteSampleMessage(message);
@@ -62,8 +65,9 @@ namespace Prototype.Tests.Unit
         {
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps.Object, filter);
+            var logger = new Mock<ILogger>();
+            var filter = new MessageFilter(env.Object, logger.Object);
+            var logicClass = new MessageRouter(logger.Object, dataOps.Object, filter);
             var message = TestMessages.GetTestUpdateSampleEntityMesssage();
 
             logicClass.RouteSampleMessage(message);
@@ -76,8 +80,9 @@ namespace Prototype.Tests.Unit
         {
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps.Object, filter);
+            var logger = new Mock<ILogger>();
+            var filter = new MessageFilter(env.Object, logger.Object);
+            var logicClass = new MessageRouter(logger.Object, dataOps.Object, filter);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
 
             logicClass.RouteSampleMessage(message);

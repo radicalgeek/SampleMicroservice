@@ -34,17 +34,16 @@ namespace Prototype.Service.Data
             {
                 try
                 {
-                    _logger.Info("Removing entity {0}", need.SampleUuid);
+                    _logger.Info("Event=\"Removing entity\" Entity=\"{0}\"", need.SampleUuid);
                     string id = need.SampleUuid.ToString();
                     _sampleEntityRepository.Delete(id);
-                    _logger.Info("Entity {0} Deleted", need.SampleUuid);
+                    _logger.Info("Event=\"Deleted entity\" Entity=\"{0}\"", need.SampleUuid);
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex, "Unable to delete entity {0}", need.SampleUuid);
+                    _logger.Error(ex, "Event=\"Faild to remove entity\" Entity=\"{0}\"", need.SampleUuid);
                 }
             }
-
         }
 
         /// <summary>
@@ -53,7 +52,6 @@ namespace Prototype.Service.Data
         /// <param name="message">The dynamic message from the bus containig the details of the item to retrive</param>
         public void GetSampleEntities(dynamic message)
         {
-            _logger.Info("Locating SampleEntities for message: {0}", message.SampleUuid);
             var entities = new List<SampleEntity>();
             foreach (var need in message.Needs)
             {
@@ -62,14 +60,15 @@ namespace Prototype.Service.Data
                     string query = need.SampleUuid.ToString();
                     var entity = _sampleEntityRepository.GetById(query);
                     entities.Add(entity);
-                    _logger.Info("SampleEntity {0} located", entity.Id);
+                    _logger.Info("Event=\"Retrived entity\" Entity=\"{0}\"", entity.Id);
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex, "Unable to locate SampleEntity {0}", need.SampleUuid.ToString());
+                    _logger.Error(ex, "Event=\"Unable to retrived entity\" Entity=\"{0}\"", need.SampleUuid.ToString());
                 }
                 if (entities.Count > 0)
                 {
+                    //TODO: retrive routing key from config
                     PublishSuccessMessage(message, entities, "A.B");
                 }
                 else
@@ -88,16 +87,16 @@ namespace Prototype.Service.Data
         public void UpdateSampleEntities(dynamic message)
         {
             var entity = EntityMapper.MapMessageToEntities(message);
-            _logger.Info("Updating SampleEntities from message: {0}", message.SampleUuid);
             try
             {
                 _sampleEntityRepository.Update(entity);
-                _logger.Info("SampleEntities updated for message {0}", message.SampleUuid);
+                _logger.Info("Event=\"Updated entity\" Entity=\"{0}\"", message.SampleUuid);
+                //TODO: retrive routing key from config
                 PublishSuccessMessage(message, entity, "A.B");
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unable to update SampleEntities for message {0}", message.SampleUuid);
+                _logger.Error(ex, "Event=\"Unable to update entity\" Entity=\"{0}\"", message.SampleUuid);
             }
         }
 
@@ -108,20 +107,20 @@ namespace Prototype.Service.Data
         public void CreateSampleEntities(dynamic message)
         {
             var entities = EntityMapper.MapMessageToEntities(message);
-            _logger.Info("Storing new SampleEntities from message: {0}", message.SampleUuid);
             try
             {
                 _sampleEntityRepository.Add(entities);
                 foreach (SampleEntity entity in entities)
                 {
-                    _logger.Info("New SampleEntity {0} created", entity.Id);
+                    _logger.Info("Event=\"Created entity\" Entity=\"{0}\"", entity.Id);
 
                 }
+                //TODO: retrive routing key from config
                 PublishSuccessMessage(message, entities, "A.B");
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unable to store new SampleEntities from message {0}", message.SampleUuid);
+                _logger.Error(ex, "Event=\"Unable to create entity\" Entity=\"{0}\"", message.SampleUuid);
                 //TODO: publish error message to bus
             }
         }

@@ -42,8 +42,8 @@ namespace Prototype.Tests.Intergration
             var publisher = new MessagePublisher(bus, logger.Object, exchange,queue);
 
             var dataOps = new DataOperations(logger.Object, publisher,repo.Object,env.Object);
-            var filter = new MessageFilter(env.Object);
-            var logicClass = new MessageRouter(env.Object, dataOps, filter);
+            var filter = new MessageFilter(env.Object, logger.Object);
+            var logicClass = new MessageRouter(logger.Object, dataOps, filter);
             var messageData = TestMessages.GetTestCreateSampleEntityMessage();
             env.Setup(e => e.GetServiceName()).Returns("Fake-Service");
             env.Setup(e => e.GetServiceVersion()).Returns(2);

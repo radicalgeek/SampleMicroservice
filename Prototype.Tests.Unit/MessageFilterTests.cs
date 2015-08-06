@@ -31,7 +31,7 @@ namespace Prototype.Tests.Unit
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
 
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
 
             var result = filter.ShouldTryProcessingMessage(message);
@@ -47,7 +47,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
 
@@ -66,7 +66,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestDeleteSampleEntityMesssage();
 
             var result = filter.ShouldTryProcessingMessage(message);
@@ -82,7 +82,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -102,7 +102,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -122,7 +122,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -143,7 +143,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -164,7 +164,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -189,7 +189,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);
@@ -214,7 +214,7 @@ namespace Prototype.Tests.Unit
             var repo = new Mock<IRepository<SampleEntity>>();
             var env = new Mock<IEnvironment>();
             var dataOps = new Mock<IDataOperations>();
-            var filter = new MessageFilter(env.Object);
+            var filter = new MessageFilter(env.Object, logger.Object);
             var message = TestMessages.GetTestVersion1Message();
             env.Setup(e => e.GetServiceName()).Returns("SampleService");
             env.Setup(e => e.GetServiceVersion()).Returns(2);

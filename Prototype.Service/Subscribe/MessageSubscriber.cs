@@ -42,9 +42,11 @@ namespace Prototype.Service.Subscribe
         /// </summary>
         public void Start()
         {     
+            //TODO: move routing key to config
+            _logger.Info("Event=\"Binding message queue to exchange\" Exchange=\"{0}\" Queue=\"{1}\" ", _exchange.Name, _queue.Name);
             _bus.Bind(_exchange, _queue, "A.*");
-             //_bus.Consume<object>(_queue, (message, info) => _messageConsumer.Consume((IMessage<SampleMessage>)message));
 
+            _logger.Info("Event=\"Subscribing to message queue\" Queue=\"{0}\" ", _queue.Name);
              _consumer =  _bus.Consume<object>(_queue, (message, info) =>
                 Task.Factory.StartNew(() =>
                     _messageConsumer.Consume(message)
@@ -54,6 +56,7 @@ namespace Prototype.Service.Subscribe
 
         public void Stop()
         {
+            _logger.Info("Event=\"Unsubscribing from message queue\" Queue=\"{0}\" ", _queue.Name);
             _consumer.Dispose();
         }
     }

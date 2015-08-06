@@ -40,7 +40,7 @@ namespace Prototype.Service.Modules
             Bind<IEnvironment>().To<Environment>();
             Bind<IMessageRouter>().To<MessageRouter>();
             Bind<IDataOperations>().To<DataOperations>();
-            Bind<IMessageFilter>().To<IMessageFilter>();
+            Bind<IMessageFilter>().To<MessageFilter>();
         }
     }
 }

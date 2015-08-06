@@ -50,22 +50,7 @@ namespace Prototype.Tests.Unit
             Assert.IsTrue(repo.Entities.Count.Equals(2));
         }
 
-        [Test]
-        public void PostOperationLogsStoringOfEntities()
-        {
-            var publisher = new Mock<IMessagePublisher>();
-            var logger = new Mock<ILogger>();
-            var repo = new FakeRepository();
-            var env = new Mock<IEnvironment>();
-            var logicClass = new DataOperations(logger.Object, publisher.Object, repo, env.Object);
-            var invocations = new List<string>();
-            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object>()))
-                .Callback<string, object[]>((message, obj) => invocations.Add(message));
 
-            logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
-
-            Assert.IsTrue(invocations[0].Contains("Storing new SampleEntities from message"));
-        }
 
         [Test]
         public void PostOperationLogsSuccessfullStoreOfEntities()
@@ -81,7 +66,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(invocations[1].Contains("New SampleEntity"));
+            Assert.IsTrue(invocations[1].Contains("Created entity"));
         }
 
         [Test]
@@ -98,9 +83,9 @@ namespace Prototype.Tests.Unit
 
             logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(invocations[1].Contains("New SampleEntity"));
-            Assert.IsTrue(invocations[2].Contains("New SampleEntity"));
-            Assert.IsTrue(invocations.Count == 3);
+            Assert.IsTrue(invocations[0].Contains("Created entity"));
+            Assert.IsTrue(invocations[1].Contains("Created entity"));
+            Assert.IsTrue(invocations.Count == 2);
         }
 
         [Test]
@@ -118,7 +103,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(invocations[0].Contains("Unable to store new SampleEntities from message "));
+            Assert.IsTrue(invocations[0].Contains("Unable to create entity"));
 
         }
 
@@ -237,30 +222,7 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [Test]
-        public void GetOperationLogsThatItIsLookingForEntity()
-        {
-            var publisher = new Mock<IMessagePublisher>();
-            var logger = new Mock<ILogger>();
-            var repo = new FakeRepository();
-            var env = new Mock<IEnvironment>();
-            var logicClass = new DataOperations(logger.Object, publisher.Object, repo, env.Object);
 
-            var message = TestMessages.GetTestReadSampleEntityMessage();
-            var entitys = TestEntities.SetUpSampleEntities(message);
-            var logList = new List<string>();
-            var responseList = new List<dynamic>();
-
-            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>()))
-                .Callback<dynamic, string>((msg, str) => responseList.Add(msg));
-            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
-                .Callback<string, object[]>((msg, obj) => logList.Add(msg));
-
-            repo.Entities = entitys;
-            logicClass.GetSampleEntities(message);
-
-            Assert.IsTrue(logList[0].Contains("Locating SampleEntities for message:"));
-        }
 
         [Test]
         public void GetOperationLogsEntityFound()
@@ -284,7 +246,7 @@ namespace Prototype.Tests.Unit
             repo.Entities = entitys;
             logicClass.GetSampleEntities(message);
 
-            Assert.IsTrue(logList[1].Contains("located"));
+            Assert.IsTrue(logList[0].Contains("Retrived entity"));
         }
 
         [Test]
@@ -309,7 +271,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.GetSampleEntities(message);
 
-            Assert.IsTrue(logList[0].Contains("Unable to locate SampleEntity"));
+            Assert.IsTrue(logList[0].Contains("Unable to retrived entity"));
         }
 
 
@@ -343,33 +305,6 @@ namespace Prototype.Tests.Unit
 
         }
 
-        [Test]
-        public void PutOperationLogsEntityUpdating()
-        {
-            var publisher = new Mock<IMessagePublisher>();
-            var logger = new Mock<ILogger>();
-            var repo = new FakeRepository();
-            var env = new Mock<IEnvironment>();
-            var logicClass = new DataOperations(logger.Object, publisher.Object, repo, env.Object);
-
-            var message = TestMessages.GetTestUpdateSampleEntityMesssage();
-            var entitys = TestEntities.SetUpSampleEntityFromMessage(message);
-            var logResponse = new List<string>();
-            var responseList = new List<dynamic>();
-            publisher.Setup(p => p.Publish(It.IsAny<object>(), It.IsAny<string>())).Callback<dynamic, string>((msg, str) => responseList.Add(msg));
-            logger.Setup(l => l.Info(It.IsAny<string>(), It.IsAny<object[]>()))
-                .Callback<string, object[]>((msg, obj) => logResponse.Add(msg));
-
-
-            message.Needs[0].NewStringValue = "Updated Test";
-            message.Needs[0].NewIntValue = 456;
-
-            repo.Entities = entitys;
-            logicClass.UpdateSampleEntities(message);
-
-            Assert.IsTrue(logResponse[0].Contains("Updating SampleEntities from message"));
-
-        }
 
         [Test]
         public void PutOperationLogsEntityUpdated()
@@ -395,7 +330,7 @@ namespace Prototype.Tests.Unit
             repo.Entities = entitys;
             logicClass.UpdateSampleEntities(message);
 
-            Assert.IsTrue(logResponse[1].Contains("SampleEntities updated for message"));
+            Assert.IsTrue(logResponse[0].Contains("Updated entity"));
 
         }
 
@@ -454,7 +389,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.UpdateSampleEntities(message);
 
-            Assert.IsTrue(logResponse[0].Contains("Unable to update SampleEntities for message"));
+            Assert.IsTrue(logResponse[0].Contains("Unable to update entity"));
 
         }
 
@@ -557,7 +492,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.DeleteSampleEntities(message);
 
-            Assert.IsTrue(logResponse[0].Contains("Unable to delete entity"));
+            Assert.IsTrue(logResponse[0].Contains("Faild to remove entity"));
 
         }
 

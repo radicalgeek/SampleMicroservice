@@ -33,23 +33,19 @@ namespace Prototype.Service.Consume
         public void Consume(dynamic message)
         {
             var stopwatch = GetStopwatch();
-
-            _logger.Info("Message recieved {0}", message.Properties.CorrelationId);
-
-            var dynamicMessageObject = GetDynamicMessageObject(message.Body);
+            _logger.Info("Event=\"Begun Consuming Message\" CorrelationId=\"{0}\" ", message.Properties.CorrelationId);
+            var dynamicMessageObject = GetDynamicMessageObject(message);
 
             try
             {
-                _logger.Info("Proccessing message {0} begun", message.Properties.CorrelationId);
                 _messageRouter.RouteSampleMessage(dynamicMessageObject);
-                _logger.Info("Proccessing message {0} Succeded", message.Properties.CorrelationId);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Processing message {0} failed", message.Properties.CorrelationId);
+                _logger.Error(ex, "Event=\"Error Consuming Message\" CorrelationId=\"{0}\" ", message.Properties.CorrelationId);
             }
             stopwatch.Stop();
-            _logger.Trace("Message {0} proccessed in {1}", message.Properties.CorrelationId, stopwatch.Elapsed);
+            _logger.Trace("Event=\"Finished Consuming Message\" CorrelationId=\"{0}\" TimeElapsed=\"{1}\"", message.Properties.CorrelationId, stopwatch.Elapsed);
 
         }
 
@@ -58,9 +54,18 @@ namespace Prototype.Service.Consume
         /// </summary>
         /// <param name="message">the incoming SampleMessage Object (with a JSON string)</param>
         /// <returns>dynamic object</returns>
-        private static dynamic GetDynamicMessageObject(SampleMessage message)
+        private dynamic GetDynamicMessageObject(dynamic message)
         {
-            return JsonConvert.SerializeObject(message);           
+            try
+            {
+                return JsonConvert.SerializeObject(message.Body);   
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Event=\"ErrorConsumingMessage\" CorrelationId=\"{0}\" Message=\"Unable to convert message to C# dynamic object\" ", message.Properties.CorrelationId);
+                throw;
+            }
+                    
         }
 
         /// <summary>
