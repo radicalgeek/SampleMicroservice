@@ -63,7 +63,7 @@ namespace Prototype.Service.Data
                 {
                     string query = need.SampleUuid.ToString();
                     var stopwatch = GetStopwatch();
-                    _logger.Info("Event=\"Retrived Entities\" Entity=\"{0}\" MessageUuid=\"{1}\"",query, message.Uuid);
+                    _logger.Info("Event=\"Retrived Entities\" Entity=\"{0}\" MessageUuid=\"{1}\"", query, message.SampleUuid);
                     var entity = _sampleEntityRepository.GetById(query);
                     stopwatch.Stop();
                     entities.Add(entity);
@@ -101,7 +101,7 @@ namespace Prototype.Service.Data
             try
             {
                 var stopwatch = GetStopwatch();
-                _logger.Info("Event=\"Updating Entities\" MessageUuid=\"{0}\"", message.Uuid);
+                _logger.Info("Event=\"Updating Entities\" MessageUuid=\"{0}\"", message.SampleUuid);
                 _sampleEntityRepository.Update(entity);
                 _logger.Info("Event=\"Updated entity\" Entity=\"{0}\" ResponseTime=\"{1}\"", message.SampleUuid, stopwatch.Elapsed);
                 //TODO: retrive routing key from config
@@ -128,9 +128,9 @@ namespace Prototype.Service.Data
             try
             {
                 var stopwatch = GetStopwatch();
-                _logger.Info("Event=\"Creating Entities\" MessageUuid=\"{0}\"", message.Uuid);
+                _logger.Info("Event=\"Creating Entities\" MessageUuid=\"{0}\"", message.SampleUuid);
                 _sampleEntityRepository.Add(entities);
-                _logger.Info("Event=\"Finished Creating Entities\" MessageUuid=\"{0}\" ResponseTime=\"{1}\"", message.Uuid, stopwatch.Elapsed);
+                _logger.Info("Event=\"Finished Creating Entities\" MessageUuid=\"{0}\" ResponseTime=\"{1}\"", message.SampleUuid, stopwatch.Elapsed);
                 stopwatch.Stop();
                 foreach (SampleEntity entity in entities)
                 {

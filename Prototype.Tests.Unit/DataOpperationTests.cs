@@ -66,7 +66,7 @@ namespace Prototype.Tests.Unit
 
             logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(invocations[1].Contains("Created entity"));
+            Assert.IsTrue(invocations[2].Contains("Created entity"));
         }
 
         [Test]
@@ -83,9 +83,9 @@ namespace Prototype.Tests.Unit
 
             logicClass.CreateSampleEntities(TestMessages.GetTestCreateSampleEntityMessageWithMultiple());
 
-            Assert.IsTrue(invocations[0].Contains("Created entity"));
             Assert.IsTrue(invocations[1].Contains("Created entity"));
-            Assert.IsTrue(invocations.Count == 2);
+            Assert.IsTrue(invocations[2].Contains("Created entity"));
+            Assert.IsTrue(invocations.Count == 3);
         }
 
         [Test]
@@ -246,7 +246,7 @@ namespace Prototype.Tests.Unit
             repo.Entities = entitys;
             logicClass.GetSampleEntities(message);
 
-            Assert.IsTrue(logList[0].Contains("Retrived entity"));
+            Assert.IsTrue(logList[1].Contains("Retrived entity"));
         }
 
         [Test]
@@ -330,7 +330,7 @@ namespace Prototype.Tests.Unit
             repo.Entities = entitys;
             logicClass.UpdateSampleEntities(message);
 
-            Assert.IsTrue(logResponse[0].Contains("Updated entity"));
+            Assert.IsTrue(logResponse[1].Contains("Updated entity"));
 
         }
 
