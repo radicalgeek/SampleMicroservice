@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using MongoRepository;
 using Prototype.Logger;
@@ -36,8 +38,10 @@ namespace Prototype.Service.Data
                 {
                     _logger.Info("Event=\"Removing entity\" Entity=\"{0}\"", need.SampleUuid);
                     string id = need.SampleUuid.ToString();
+                    var stopwatch = GetStopwatch();
                     _sampleEntityRepository.Delete(id);
-                    _logger.Info("Event=\"Deleted entity\" Entity=\"{0}\"", need.SampleUuid);
+                    stopwatch.Stop();
+                    _logger.Info("Event=\"Deleted entity\" Entity=\"{0}\" ResponseTime=\"{1}\"", need.SampleUuid, stopwatch.Elapsed);
                 }
                 catch (Exception ex)
                 {
@@ -58,9 +62,12 @@ namespace Prototype.Service.Data
                 try
                 {
                     string query = need.SampleUuid.ToString();
+                    var stopwatch = GetStopwatch();
+                    _logger.Info("Event=\"Retrived Entities\" Entity=\"{0}\" MessageUuid=\"{1}\"",query, message.Uuid);
                     var entity = _sampleEntityRepository.GetById(query);
+                    stopwatch.Stop();
                     entities.Add(entity);
-                    _logger.Info("Event=\"Retrived entity\" Entity=\"{0}\"", entity.Id);
+                    _logger.Info("Event=\"Retrived entity\" Entity=\"{0}\" ResponseTime=\"{1}\"", entity.Id,stopwatch.Elapsed);
                 }
                 catch (Exception ex)
                 {
@@ -73,7 +80,11 @@ namespace Prototype.Service.Data
                 }
                 else
                 {
-                    //TODO:Publish fail message
+                    var errorMessage = String.Format("Event=\"Unable to retrived entity\" Entity=\"{0}\"",
+                        need.SampleUuid.ToString());
+                                  
+                    //TODO: retrive routing key from config
+                    PublishErrorMessage(message, errorMessage, "A.B");
                 }
 
             }
@@ -89,14 +100,21 @@ namespace Prototype.Service.Data
             var entity = EntityMapper.MapMessageToEntities(message);
             try
             {
+                var stopwatch = GetStopwatch();
+                _logger.Info("Event=\"Updating Entities\" MessageUuid=\"{0}\"", message.Uuid);
                 _sampleEntityRepository.Update(entity);
-                _logger.Info("Event=\"Updated entity\" Entity=\"{0}\"", message.SampleUuid);
+                _logger.Info("Event=\"Updated entity\" Entity=\"{0}\" ResponseTime=\"{1}\"", message.SampleUuid, stopwatch.Elapsed);
                 //TODO: retrive routing key from config
                 PublishSuccessMessage(message, entity, "A.B");
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Event=\"Unable to update entity\" Entity=\"{0}\"", message.SampleUuid);
+                var errorMessage = String.Format("Event=\"Unable to update entity\" Entity=\"{0}\"",
+                        message.SampleUuid.ToString());
+
+                //TODO: retrive routing key from config
+                PublishErrorMessage(message, errorMessage, "A.B");
             }
         }
 
@@ -109,7 +127,11 @@ namespace Prototype.Service.Data
             var entities = EntityMapper.MapMessageToEntities(message);
             try
             {
+                var stopwatch = GetStopwatch();
+                _logger.Info("Event=\"Creating Entities\" MessageUuid=\"{0}\"", message.Uuid);
                 _sampleEntityRepository.Add(entities);
+                _logger.Info("Event=\"Finished Creating Entities\" MessageUuid=\"{0}\" ResponseTime=\"{1}\"", message.Uuid, stopwatch.Elapsed);
+                stopwatch.Stop();
                 foreach (SampleEntity entity in entities)
                 {
                     _logger.Info("Event=\"Created entity\" Entity=\"{0}\"", entity.Id);
@@ -121,7 +143,12 @@ namespace Prototype.Service.Data
             catch (Exception ex)
             {
                 _logger.Error(ex, "Event=\"Unable to create entity\" Entity=\"{0}\"", message.SampleUuid);
-                //TODO: publish error message to bus
+
+                var errorMessage = String.Format("Event=\"Unable to create entity\" Entity=\"{0}\"",
+                        message.SampleUuid.ToString());
+
+                //TODO: retrive routing key from config
+                PublishErrorMessage(message, errorMessage, "A.B");
             }
         }
 
@@ -147,6 +174,32 @@ namespace Prototype.Service.Data
             var serializedMessage = Newtonsoft.Json.JsonConvert.SerializeObject(orignalMessage);
 
             _publisher.Publish(serializedMessage, topic);
+        }
+
+        public void PublishErrorMessage(dynamic orignalMessage, string errorMessage, string topic)
+        {
+            orignalMessage.ModifiedTime = DateTime.Now.ToUniversalTime();
+            orignalMessage.ModifiedBy = _environment.GetServiceName();
+
+            var errors = new List<dynamic>();
+            dynamic error = new ExpandoObject();
+            error.Source = _environment.GetServiceName();
+            error.Message = errorMessage;
+            errors.Add(error);
+
+            orignalMessage.Errors = errors;
+
+            var serializedMessage = Newtonsoft.Json.JsonConvert.SerializeObject(orignalMessage);
+
+            _publisher.Publish(serializedMessage, topic);
+        }
+
+        private Stopwatch GetStopwatch()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Reset();
+            stopwatch.Start();
+            return stopwatch;
         }
     }
 }
